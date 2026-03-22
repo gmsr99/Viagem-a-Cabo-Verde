@@ -273,6 +273,38 @@
             font-size: 1.2rem;
         }
 
+        .table-precos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .table-precos th, .table-precos td {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table-precos th {
+            background-color: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .table-precos tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .transport-title {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--text-main);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 8px;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -563,6 +595,74 @@
                     <li><strong>Gestão de Bagagem:</strong> Concentra os líquidos e peso na única mala de cabine grande.
                         As duas pequenas (sob o assento) devem ficar leves.</li>
                 </ul>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Guia de Transportes e Preços 🚕</span>
+            </summary>
+            <div class="conteudo">
+                
+                <div class="transport-title">São Vicente (Táxis)</div>
+                <table class="table-precos">
+                    <thead>
+                        <tr>
+                            <th>Trajeto</th>
+                            <th>Diurno</th>
+                            <th>Noturno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Centro a Centro</td>
+                            <td>150 CVE</td>
+                            <td>200 CVE</td>
+                        </tr>
+                        <tr>
+                            <td>Centro a Subúrbio</td>
+                            <td>200 CVE</td>
+                            <td>250 CVE</td>
+                        </tr>
+                        <tr>
+                            <td>Aeroporto a Centro</td>
+                            <td colspan="2">1000 CVE</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="transport-title">Santo Antão (Alugueres Locais)</div>
+                <p style="font-size: 0.85rem; color: #475569; margin-top: 5px; margin-bottom: 5px;">Em Santo Antão não existem táxis convencionais. As viagens fazem-se em <strong>"Alugueres"</strong> coletivos (carrinhas Hiace turísticas ou de caixa aberta Hilux/Dyna). Os preços são fixos e cobrados por passageiro.</p>
+                <table class="table-precos">
+                    <thead>
+                        <tr>
+                            <th>Trajeto</th>
+                            <th>Preço Padrão (Por Pessoa)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Porto Novo ➔ Ribeira Grande (Estrada da Corda)</td>
+                            <td>~500 CVE <span style="font-size: 0.75rem; color: #64748b;">(Útil p/ Dia 2)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Porto Novo ➔ Ribeira Grande (Estrada Nova/Litoral)</td>
+                            <td>~400 CVE <span style="font-size: 0.75rem; color: #64748b;">(Mais rápida, Regresso)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ribeira Grande ➔ Ponta do Sol (Tudo rápido, 10 min)</td>
+                            <td>~50 a 100 CVE</td>
+                        </tr>
+                        <tr>
+                            <td>Ribeira Grande ➔ Vale do Paúl (Pombas)</td>
+                            <td>~100 a 150 CVE</td>
+                        </tr>
+                        <tr>
+                            <td>Ribeira Grande ➔ Ribeira da Torre (Xoxo)</td>
+                            <td>~100 CVE</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </details>
 
