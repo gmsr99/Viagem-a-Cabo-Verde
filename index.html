@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Roteiro Cabo Verde: Modo Aventura</title>
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-color: #0ea5e9;
+            --card-bg: #ffffff;
+            --hack-bg: #fef2f2;
+            --hack-text: #991b1b;
+            --booking-bg: #fefce8;
+            --booking-border: #eab308;
+            --booking-confirmed-bg: #ecfdf5;
+            --booking-confirmed-border: #10b981;
+            --voo-bg: #f0f9ff;
+            --voo-border: #0ea5e9;
+            --pre-trip-bg: #fdf2f8;
+            --pre-trip-border: #db2777;
+            --border-radius: 10px;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        details.dia-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--accent-color);
+            overflow: hidden;
+        }
+
+        details.pre-trip-card {
+            border-left: 5px solid var(--pre-trip-border);
+        }
+
+        details>summary {
+            list-style: none;
+            padding: 18px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .titulo-dia {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        summary::after {
+            content: "+";
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        .conteudo {
+            padding: 0 18px 18px 18px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        .tag-data {
+            background-color: #e2e8f0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .hack-box {
+            background-color: var(--hack-bg);
+            color: var(--hack-text);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            border: 1px dashed #fca5a5;
+        }
+
+        .booking-box {
+            background-color: var(--booking-bg);
+            border-left: 4px solid var(--booking-border);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .booking-box strong {
+            color: #854d0e;
+        }
+
+        .booking-confirmed {
+            background-color: var(--booking-confirmed-bg);
+            border-left: 4px solid var(--booking-confirmed-border);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .booking-confirmed strong {
+            color: #065f46;
+        }
+
+        .tag-alojamento {
+            display: inline-block;
+            background: var(--booking-border);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .tag-alojamento-ok {
+            display: inline-block;
+            background: var(--booking-confirmed-border);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .voo-box {
+            background-color: var(--voo-bg);
+            border-left: 4px solid var(--voo-border);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .voo-box strong {
+            color: #0369a1;
+        }
+
+        .tag-voo {
+            display: inline-block;
+            background: var(--voo-border);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .pre-trip-box {
+            background-color: var(--pre-trip-bg);
+            border-left: 4px solid var(--pre-trip-border);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .pre-trip-box strong {
+            color: #be185d;
+        }
+
+        .dormida-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid #64748b;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .dormida-badge strong {
+            color: #475569;
+        }
+
+        .dormida-icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            summary {
+                padding: 15px;
+                font-size: 1.05rem;
+            }
+
+            .conteudo {
+                padding: 0 15px 15px 15px;
+            }
+
+            .grid-dashboard {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Workflow Cabo Verde</h1>
+        <p class="subtitle">Modo Aventura & Low Cost (8 Dias)</p>
+    </header>
+
+    <main class="grid-dashboard">
+
+        <details class="dia-card pre-trip-card" open>
+            <summary>
+                <span class="titulo-dia">Setup Inicial (Pre-Trip)</span>
+            </summary>
+            <div class="conteudo">
+                <div class="pre-trip-box">
+                    <strong>1. Burocracia TSA (Taxa de Segurança):</strong><br>
+                    Registo EASE efetuado com sucesso (22/03/2026).<br><br>
+                    <strong>👤 Gil Ribeiro</strong><br>
+                    Registration number: <code>QnzD9WL9E</code><br>
+                    <a href="https://shopgov4.zetesft.com/TicketGenerationForm.aspx?bsk=10845055&key=0047872E071D0E4C0D7F27F7763188D1874DB7E8" target="_blank" style="color: #be185d; text-decoration: underline; font-weight: bold;">Download the receipt here</a><br><br>
+                    <strong>👤 Leonor Álvaro (SOARES SIMAO ALVARO)</strong><br>
+                    Registration number: <code>ykX6v82Ev</code><br>
+                    <a href="https://shopgov4.zetesft.com/TicketGenerationForm.aspx?bsk=10845137&key=244F3AAF7F15A455C2E7AB2DA9080AA5F20698C3" target="_blank" style="color: #be185d; text-decoration: underline; font-weight: bold;">Download the receipt here</a>
+                </div>
+                <div class="pre-trip-box">
+                    <strong>2. Bug do Cartão de Embarque:</strong><br>
+                    O voo da ida sofreu alteração. Se já fizeste check-in, tens de ir à app da easyJet e
+                    <strong>descarregar o cartão de embarque novamente</strong> para atualizar o QR Code.
+                </div>
+                <div class="pre-trip-box">
+                    <strong>3. Ferry CV Interilhas:</strong><br>
+                    Bilhetes de Ida e Volta já comprados. <a href="public/Cartão_Embarque_Ferry.pdf" target="_blank" style="color: #be185d; text-decoration: underline; font-weight: bold;">Ver Cartões de Embarque (PDF)</a>.<br>
+                    <strong>Atenção:</strong> É necessário estar no porto 1h30 antes da partida.
+                </div>
+                <div class="pre-trip-box">
+                    <strong>4. Proteção de Hardware (Mala):</strong><br>
+                    A mala grande vai no tejadilho da Hiace nas estradas de terra de Santo Antão. Leva um saco do lixo
+                    grande/resistente para a envolveres e protegeres do pó.
+                </div>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 1: Aterragem Tática <span class="tag-data">(7/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> São Vicente (Casa Senador)</div>
+                </div>
+                <div class="voo-box">
+                    <span class="tag-voo">Voo de Ida</span><br>
+                    <strong>Reserva easyJet:</strong> KBX5BRR<br>
+                    <strong>Voo:</strong> EJU7581 (Lisboa → São Vicente)<br>
+                    <strong>Horário:</strong> Partida 13:40 | Aterragem 16:05
+                </div>
+
+                <div class="booking-confirmed">
+                    <span class="tag-alojamento-ok">Reserva Confirmada</span><br>
+                    <strong>Onde:</strong> Casa Senador (Rua Senador Vera-Cruz, Mindelo)<br>
+                    <strong>Quando:</strong> 7 a 8 de Maio (1 noite)<br>
+                    <strong>Comprovativo:</strong> <a href="public/Booking.com_7-8-maio.pdf" target="_blank" style="color: #065f46; font-weight: bold; text-decoration: underline;">Ver Confirmação (PDF)</a><br>
+                    <strong>⚠️ Pagamento:</strong> Alojamento pago no local apenas em dinheiro (aprox. 5.952 CVE).
+                </div>
+
+                <ul>
+                    <li><strong>Logística:</strong> Apanha um "Aluguer" (coletivo) à saída por 100 CVE (~1€) ou táxi por
+                        1000 CVE (~9€) para o Mindelo.</li>
+                    <li><strong>Vibe Check:</strong> Pôr do sol na Praia da Laginha.</li>
+                    <li><strong>Jantar:</strong> Casa da Morna.</li>
+                </ul>
+                <div class="hack-box">
+                    <strong>[HACK] Dinheiro:</strong> Levanta Escudos no ATM do aeroporto logo na chegada.
+                </div>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 2: A Subida no Caos <span class="tag-data">(8/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> Santo Antão (Ribeira Grande - Lar do Viajante)</div>
+                </div>
+                <div class="booking-confirmed">
+                    <span class="tag-alojamento-ok">Reserva Confirmada</span><br>
+                    <strong>Onde:</strong> Lar do Viajante (Ribeira Grande)<br>
+                    <strong>Quando:</strong> 8 a 11 de Maio (3 noites)<br>
+                    <strong>Status:</strong> Confirmado. <strong>Check-in agendado para as 15:00.</strong> (Aviso de
+                    Hardware: 3º Andar sem elevador).
+                </div>
+
+                <div class="voo-box">
+                    <span class="tag-voo" style="background-color: #0284c7; border-color: #0284c7;">Ferry de Ida</span><br>
+                    <strong>Navio:</strong> Chiquinho-BL (CV Interilhas)<br>
+                    <strong>Partida:</strong> São Vicente às 08:00 (Check-in até 06:30)<br>
+                    <strong>Chegada:</strong> Santo Antão (Porto Novo) às 09:00<br>
+                    <strong>Bilhetes:</strong> <a href="public/Cartão_Embarque_Ferry.pdf" target="_blank" style="color: #0369a1; font-weight: bold; text-decoration: underline;">Ver Cartões (PDF)</a>
+                </div>
+
+                <ul>
+                    <li><strong>Logística Matinal:</strong> Apanha boleia ou Aluguer cedo para estares no porto às 06:30.</li>
+                    <li><strong>Transporte Local:</strong> Em Porto Novo, apanha a Hiace para a "Estrada da Corda" (~500
+                        CVE). Pede para sair na cratera da Cova (~10:00).</li>
+                    <li><strong>Trekking (Missão Principal):</strong> Desce a pé até ao Vale do Paúl (Trilho 101). A
+                        descida demora entre 3 a 4 horas.</li>
+                    <li><strong>Sincronização de Check-in (15:00):</strong> Ao terminares o trilho no Paúl, apanha um
+                        Aluguer rápido (~20 min) para a Ribeira Grande. A matemática de tempo bate certo com a hora de
+                        check-in combinada.</li>
+                </ul>
+                <div class="hack-box">
+                    <strong>[HACK] Rede e Água:</strong> Como ficas na Ribeira Grande, tens supermercados maiores. Após
+                    o check-in, aproveita para comprar o cartão SIM "CVMóvel" e garrafões de 5L de água para distribuir
+                    para os próximos dias de trekking.
+                </div>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 3: A "Besta" Costeira <span class="tag-data">(9/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> Santo Antão (Ribeira Grande - Lar do Viajante)</div>
+                </div>
+                <ul>
+                    <li><strong>A Missão:</strong> O trilho mais épico do país. Ponta do Sol → Cruzinha.</li>
+                    <li><strong>Logística Matinal:</strong> Apanha um Aluguer da Ribeira Grande para a Ponta do Sol (~15
+                        min) para iniciar o trilho.</li>
+                    <li><strong>Rota:</strong> Passa por Fontainhas, Corvo, e Formiguinhas (~14km).</li>
+                    <li><strong>Almoço:</strong> Paragem em Formiguinhas em casa de locais.</li>
+                    <li><strong>Regresso:</strong> Na Cruzinha, apanha o Aluguer direto de volta à base na Ribeira
+                        Grande.</li>
+                </ul>
+                <div class="hack-box">
+                    <strong>[HACK] Preparação:</strong> Leva muita água (dos garrafões que compraste ontem) e dinheiro
+                    trocado. O almoço ronda os 800 CVE.
+                </div>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 4: O Vale Vertical <span class="tag-data">(10/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> Santo Antão (Ribeira Grande - Lar do Viajante)</div>
+                </div>
+                <ul>
+                    <li><strong>Logística:</strong> Como a tua base é a Ribeira Grande, a Ribeira da Torre (Xoxo) fica
+                        literalmente nas "traseiras". Apanha o Aluguer (viagem muito rápida e barata).</li>
+                    <li><strong>Ação:</strong> Explora o vale a pé e a agricultura em socalcos.</li>
+                    <li><strong>Descanso:</strong> Banhos nas cascatas ou poços de rega. Regresso rápido ao apartamento
+                        ao final do dia.</li>
+                </ul>
+                <div class="pre-trip-box">
+                    <strong>⚠️ Ação Crítica: Registo Check-in Las Rochas</strong><br>
+                    Os proprietários, Elisa e Francisco, pediram para os avisar hoje a hora exata da chegada amanhã a Mindelo (horário do Ferry).<br>
+                    <em>"One day before of your travel please let us know your arrival time and details (plane, boat)."</em>
+                </div>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 5: Chill & Transição <span class="tag-data">(11/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> São Vicente (Apartamento Las Rochas)</div>
+                </div>
+                <div class="booking-confirmed">
+                    <span class="tag-alojamento-ok">Reserva Confirmada</span><br>
+                    <strong>Onde:</strong> Apartamento Las Rochas (Lazareto)<br>
+                    <strong>Quando:</strong> 11 a 14 de Maio (3 noites)<br>
+                    <strong>Comprovativo:</strong> <a href="public/Booking.com_ Confirmation.pdf" target="_blank" style="color: #065f46; font-weight: bold; text-decoration: underline;">Ver Confirmação (PDF)</a>
+                </div>
+
+                <div class="voo-box">
+                    <span class="tag-voo" style="background-color: #0284c7; border-color: #0284c7;">Ferry de Regresso</span><br>
+                    <strong>Navio:</strong> Chiquinho-BL (CV Interilhas)<br>
+                    <strong>Partida:</strong> Santo Antão (Porto Novo) às 17:00 (Check-in até 15:30)<br>
+                    <strong>Chegada:</strong> São Vicente às 18:00<br>
+                    <strong>Bilhetes:</strong> <a href="public/Cartão_Embarque_Ferry.pdf" target="_blank" style="color: #0369a1; font-weight: bold; text-decoration: underline;">Ver Cartões (PDF)</a>
+                </div>
+
+                <ul>
+                    <li><strong>Manhã:</strong> Faz o checkout do Lar do Viajante. Podes dar um salto à Ponta do Sol
+                        para observar a descarga do peixe no porto.</li>
+                    <li><strong>Tarde:</strong> Aluguer de descida para Porto Novo (conta com aprox. 1h de viagem desde a Ribeira Grande). Cuidado com os horários para estares no porto antes das 15:30.</li>
+                    <li><strong>Noite:</strong> Chegada a Mindelo e Check-in no Apartamento Las Rochas.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 6: Tartarugas Freestyle <span class="tag-data">(12/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> São Vicente (Apartamento Las Rochas)</div>
+                </div>
+                <ul>
+                    <li><strong>Logística:</strong> Coletivo na Praça Estrela (Mindelo) até São Pedro.</li>
+                    <li><strong>Atividade:</strong> Nadar com tartarugas com os pescadores locais.</li>
+                    <li><strong>Aventura Extra:</strong> Caminhada árida ao Farol de D. Amélia.</li>
+                </ul>
+                <div class="hack-box">
+                    <strong>[Contactos Locais]:</strong> Procura pelo <strong>Nenass</strong> ou <strong>Deco</strong>
+                    na praia para ir num barco a remos.
+                </div>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 7: Mindelo Profundo <span class="tag-data">(13/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> São Vicente (Apartamento Las Rochas)</div>
+                </div>
+                <ul>
+                    <li><strong>Exploração:</strong> Mercado de Peixe e Mercado Municipal.</li>
+                    <li><strong>Cultura:</strong> Visita o CNAD.</li>
+                    <li><strong>Despedida:</strong> Bebe um Grogue "velha" num bar com música ao vivo.</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="dia-card">
+            <summary>
+                <span class="titulo-dia">Dia 8: Saída do Sistema <span class="tag-data">(14/5)</span></span>
+            </summary>
+            <div class="conteudo">
+                <div class="dormida-badge">
+                    <span class="dormida-icon">🛏️</span>
+                    <div><strong>Dormida:</strong> Casa (Lisboa)</div>
+                </div>
+                <div class="voo-box">
+                    <span class="tag-voo">Voo de Regresso</span><br>
+                    <strong>Voo:</strong> EJU7582 (São Vicente → Lisboa T1)<br>
+                    <strong>Horário:</strong> Partida 16:50 | Aterragem 23:00<br>
+                    <strong>Ação Crítica:</strong> Entrega de bagagem fecha às 16:10.
+                </div>
+
+                <ul>
+                    <li><strong>Manhã Bónus:</strong> Aproveita a manhã livre para compras (atum, doce, café).</li>
+                    <li><strong>Logística:</strong> Apanha transporte para o aeroporto por volta das 14:15. Balcão abre
+                        às 14:50.</li>
+                    <li><strong>Gestão de Bagagem:</strong> Concentra os líquidos e peso na única mala de cabine grande.
+                        As duas pequenas (sob o assento) devem ficar leves.</li>
+                </ul>
+            </div>
+        </details>
+
+    </main>
+</body>
+
+</html>
