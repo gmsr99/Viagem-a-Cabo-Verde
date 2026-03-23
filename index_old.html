@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#f8fafc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>Cabo Verde App</title>
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #0ea5e9;
+            --primary-light: #e0f2fe;
+            --card-bg: #ffffff;
+            --hack-bg: #fef2f2;
+            --hack-text: #991b1b;
+            --booking-bg: #fefce8;
+            --booking-border: #eab308;
+            --ok-bg: #ecfdf5;
+            --ok-border: #10b981;
+            --voo-bg: #f0f9ff;
+            --voo-border: #0ea5e9;
+            --alert-bg: #fdf2f8;
+            --alert-border: #db2777;
+            --safe-bottom: env(safe-area-inset-bottom, 20px);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: calc(80px + var(--safe-bottom));
+            line-height: 1.5;
+        }
+
+        /* Top Header */
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 20px 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-titles h1 {
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .header-titles p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 2px 0 0 0;
+        }
+
+        .header-icon {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* Tabs Container */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Globals */
+        h2 { font-size: 1.15rem; margin-top: 0; margin-bottom: 15px; color: var(--text-main); }
+        ul { padding-left: 20px; margin: 0; }
+        li { margin-bottom: 8px; font-size: 0.95rem; color: #334155; }
+        strong { color: var(--text-main); }
+        
+        /* Modern Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .day-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .day-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .day-date {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .dormida-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            border-left: 4px solid;
+        }
+        .box-alert { background: var(--alert-bg); border-left-color: var(--alert-border); }
+        .box-alert strong { color: #be185d; }
+        
+        .box-voo { background: var(--voo-bg); border-left-color: var(--voo-border); }
+        .box-voo strong { color: #0369a1; }
+        
+        .box-ok { background: var(--ok-bg); border-left-color: var(--ok-border); }
+        .box-ok strong { color: #065f46; }
+
+        .box-warn { background: var(--booking-bg); border-left-color: var(--booking-border); }
+        .box-warn strong { color: #b45309; }
+        
+        .box-hack { background: var(--hack-bg); border: 1px dashed #fca5a5; }
+        .box-hack strong { color: var(--hack-text); }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .tag-voo { background: var(--voo-border); }
+        .tag-ferry { background: #0284c7; }
+        .tag-ok { background: var(--ok-border); }
+        .tag-warn { background: var(--booking-border); }
+
+        /* Buttons */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            transition: background 0.2s;
+            border: none;
+            width: 100%;
+        }
+        .btn:active { background: #0284c7; }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        .btn i { font-size: 1.2rem; }
+
+        /* Tables */
+        .table-precos { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+        .table-precos th, .table-precos td { border-bottom: 1px solid #e2e8f0; padding: 12px 8px; text-align: left; }
+        .table-precos th { background-color: #f8fafc; color: var(--text-muted); font-weight: 600; }
+        .table-precos tr:last-child td { border-bottom: none; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding-bottom: var(--safe-bottom);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0 8px 0;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 600;
+            flex: 1;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+            transition: transform 0.2s;
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px);
+            font-weight: bold;
+        }
+
+        code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; }
+
+        /* Doc Item */
+        .doc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: inherit;
+        }
+        .doc-item:active { background: #f1f5f9; }
+        .doc-info { display: flex; align-items: center; gap: 12px; }
+        .doc-icon { font-size: 1.8rem; color: #ef4444; }
+        .doc-text h3 { margin: 0; font-size: 0.95rem; }
+        .doc-text p { margin: 2px 0 0 0; font-size: 0.8rem; color: var(--text-muted); }
+        .doc-arrow { color: #cbd5e1; font-size: 1.2rem; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-titles">
+            <h1>Cabo Verde</h1>
+            <p>Modo Aventura & Low Cost (8 Dias)</p>
+        </div>
+        <i class="ph ph-user-circle header-icon"></i>
+    </header>
+
+    <!-- TAB: SETUP (INÍCIO) -->
+    <main id="tab-inicio" class="tab-content active">
+        <h2>Painel Principal</h2>
+
+        <div class="card">
+            <h3 style="margin-top:0; display:flex; align-items:center; gap:8px;"><i class="ph ph-warning-octagon" style="color:var(--alert-border);"></i> Alertas & Pre-Trip</h3>
+            
+            <div class="info-box box-alert">
+                <strong>1. Burocracia TSA (EASE):</strong><br>
+                Registo efetuado com sucesso (22/03).<br><br>
+                👤 <strong>Gil Ribeiro</strong><br>
+                Nº Registo: <code>QnzD9WL9E</code><br><br>
+                👤 <strong>Leonor Álvaro</strong><br>
+                Nº Registo: <code>ykX6v82Ev</code>
+            </div>
+
+            <div class="info-box box-warn">
+                <strong>2. Bug do Cartão de Embarque:</strong><br>
+                O voo da ida sofreu alteração. Se já fizeste check-in, tens de ir à app da easyJet e <strong>descarregar o cartão novamente</strong>.
+            </div>
+
+            <div class="info-box box-voo">
+                <strong>3. Ferry CV Interilhas:</strong><br>
+                Bilhetes de Ida e Volta já comprados. É necessário estar no porto 1h30 antes da partida.
+            </div>
+
+            <div class="info-box box-hack">
+                <strong>4. Proteção de Hardware (Mala):</strong><br>
+                A mala grande vai no tejadilho da Hiace nas estradas de terra de Santo Antão. Leva um saco do lixo resistente para a proteger do pó.
+            </div>
+        </div>
+    </main>
+
+    <!-- TAB: ITINERÁRIO -->
+    <main id="tab-itinerario" class="tab-content">
+        <h2>Itinerário da Viagem</h2>
+
+        <!-- DIA 1 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 1 • 7 de Maio</span>
+                    <span class="day-title">Aterragem Tática</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed" style="font-size: 1.2rem; color: var(--primary);"></i>
+                <div>Dormida: <strong>São Vicente (Casa Senador)</strong></div>
+            </div>
+
+            <div class="info-box box-voo">
+                <div class="tag tag-voo">Voo Ida</div><br>
+                <strong>Voo:</strong> EJU7581 (LIS → VXE)<br>
+                <strong>Reserva easyJet:</strong> KBX5BRR<br>
+                <strong>Horário:</strong> 13:40 ▸ 16:05
+            </div>
+
+            <div class="info-box box-ok">
+                <div class="tag tag-ok">Confirmada</div><br>
+                <strong>Casa Senador</strong> (Mindelo)<br>
+                <strong>Pagamento:</strong> Dinheiro no local (~5.952 CVE)
+            </div>
+
+            <ul>
+                <li><strong>Transporte:</strong> Aluguer de aeroporto (100 CVE) ou táxi (1000 CVE).</li>
+                <li><strong>Vibe Check:</strong> Pôr do sol na Praia da Laginha.</li>
+                <li><strong>Jantar:</strong> Casa da Morna.</li>
+            </ul>
+
+            <div class="info-box box-hack">
+                <i class="ph ph-lightbulb"></i> <strong>HACK Dinheiro:</strong> Levanta Escudos no ATM do aeroporto logo na chegada.
+            </div>
+        </div>
+
+        <!-- DIA 2 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 2 • 8 de Maio</span>
+                    <span class="day-title">A Subida no Caos</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>Santo Antão (Lar do Viajante)</strong></div>
+            </div>
+
+            <div class="info-box box-voo" style="background:#f0f9ff; border-left-color:#0284c7;">
+                <div class="tag tag-ferry">Ferry Ida</div><br>
+                <strong>Chiquinho-BL</strong> (São Vicente → Porto Novo)<br>
+                <strong>Partida:</strong> 08:00 (Check-in 06:30)<br>
+                <strong>Chegada:</strong> 09:00
+            </div>
+
+            <div class="info-box box-ok">
+                <div class="tag tag-ok">Confirmada</div><br>
+                <strong>Lar do Viajante</strong> (Ribeira Grande)<br>
+                Check-in às 15:00 (Aviso: 3º Andar sem elevador).
+            </div>
+
+            <ul>
+                <li><strong>Hiace (Porto Novo):</strong> Para "Estrada da Corda" (~500 CVE), sair na cratera da Cova.</li>
+                <li><strong>Trekking:</strong> Desce a pé até ao Vale do Paúl (3/4 horas).</li>
+                <li><strong>Check-in:</strong> Aluguer do Paúl à Ribeira Grande a tempo das 15:00.</li>
+            </ul>
+
+            <div class="info-box box-hack">
+                <i class="ph ph-lightbulb"></i> <strong>HACK Mantimentos:</strong> Na Ribeira Grande, compra cartão SIM "CVMóvel" e garrafões de água 5L para dividir nos próximos dias.
+            </div>
+        </div>
+
+        <!-- DIA 3 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 3 • 9 de Maio</span>
+                    <span class="day-title">A "Besta" Costeira</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>Santo Antão (Lar do Viajante)</strong></div>
+            </div>
+
+            <ul>
+                <li><strong>Trilho Épico:</strong> Ponta do Sol → Cruzinha (14km).</li>
+                <li><strong>Aluguer (Manhã):</strong> Ribeira Grande → Ponta do Sol (~15 min).</li>
+                <li><strong>Rota:</strong> Fontainhas, Corvo e Formiguinhas.</li>
+                <li><strong>Almoço:</strong> Formiguinhas em casa de locais.</li>
+                <li><strong>Regresso:</strong> Da Cruzinha regressar de Aluguer à Ribeira Grande.</li>
+            </ul>
+
+            <div class="info-box box-hack">
+                <i class="ph ph-lightbulb"></i> <strong>HACK:</strong> Muita água e dinheiro trocado. Almoço ronda 800 CVE.
+            </div>
+        </div>
+
+        <!-- DIA 4 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 4 • 10 de Maio</span>
+                    <span class="day-title">O Vale Vertical</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>Santo Antão (Lar do Viajante)</strong></div>
+            </div>
+
+            <ul>
+                <li><strong>Localização:</strong> Ribeira da Torre (Xoxo) fica logo atrás de Ribeira Grande. Apanha o Aluguer (rápido/barato).</li>
+                <li><strong>Atividade:</strong> Explora o vale a pé e os socalcos.</li>
+                <li><strong>Descanso:</strong> Banhos nas cascatas. Regresso rápido.</li>
+            </ul>
+
+            <div class="info-box box-alert">
+                <strong>⚠️ Ação Crítica:</strong> Avisar os proprietários do Apartamento Las Rochas (Mindelo) da hora exata de chegada amanhã (Ferry).
+            </div>
+        </div>
+
+        <!-- DIA 5 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 5 • 11 de Maio</span>
+                    <span class="day-title">Chill & Transição</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>São Vicente (Apartamento Las Rochas)</strong></div>
+            </div>
+
+            <div class="info-box box-voo" style="background:#f0f9ff; border-left-color:#0284c7;">
+                <div class="tag tag-ferry">Ferry Regresso</div><br>
+                <strong>Chiquinho-BL</strong> (Porto Novo → São Vicente)<br>
+                <strong>Partida:</strong> 17:00 (Check-in 15:30)<br>
+                <strong>Chegada:</strong> 18:00
+            </div>
+
+            <div class="info-box box-ok">
+                <div class="tag tag-ok">Confirmada</div><br>
+                <strong>Apartamento Las Rochas</strong> (Lazareto)
+            </div>
+
+            <ul>
+                <li><strong>Manhã:</strong> Checkout e salto à Ponta do Sol para ver a descarga de peixe.</li>
+                <li><strong>Tarde:</strong> Aluguer para Porto Novo (~1h). Estar no porto antes das 15:30.</li>
+                <li><strong>Noite:</strong> Chegada a Mindelo e Check-in nas Rochas.</li>
+            </ul>
+        </div>
+
+        <!-- DIA 6 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 6 • 12 de Maio</span>
+                    <span class="day-title">Tartarugas Freestyle</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>São Vicente (Las Rochas)</strong></div>
+            </div>
+
+            <ul>
+                <li><strong>Logística:</strong> Coletivo na Praça Estrela (Mindelo) p/ São Pedro.</li>
+                <li><strong>Atividade:</strong> Nadar com tartarugas (pescadores).</li>
+                <li><strong>Aventura:</strong> Caminhada ao Farol de D. Amélia.</li>
+            </ul>
+
+            <div class="info-box box-hack">
+                <i class="ph ph-lightbulb"></i> <strong>Contactos Locais:</strong> Procura pelo <strong>Nenass</strong> ou <strong>Deco</strong> na praia.
+            </div>
+        </div>
+
+        <!-- DIA 7 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 7 • 13 de Maio</span>
+                    <span class="day-title">Mindelo Profundo</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>São Vicente (Las Rochas)</strong></div>
+            </div>
+
+            <ul>
+                <li><strong>Exploração:</strong> Mercado de Peixe e Mercado Municipal.</li>
+                <li><strong>Cultura:</strong> Visita o CNAD.</li>
+                <li><strong>Despedida:</strong> Beber um Grogue "velha" num bar com música ao vivo.</li>
+            </ul>
+        </div>
+
+        <!-- DIA 8 -->
+        <div class="card">
+            <div class="day-header">
+                <div class="day-title-wrap">
+                    <span class="day-date">Dia 8 • 14 de Maio</span>
+                    <span class="day-title">Saída do Sistema</span>
+                </div>
+            </div>
+            
+            <div class="dormida-badge">
+                <i class="ph ph-bed"></i>
+                <div>Dormida: <strong>Casa (Lisboa)</strong></div>
+            </div>
+
+            <div class="info-box box-alert">
+                <div class="tag tag-voo" style="background:var(--alert-border);">Voo Regresso</div><br>
+                <strong>Voo:</strong> EJU7582 (VXE → LIS)<br>
+                <strong>Horário:</strong> 16:50 ▸ 23:00<br>
+                <strong>Atenção:</strong> Entrega de bagagem fecha às 16:10.
+            </div>
+
+            <ul>
+                <li><strong>Manhã:</strong> Compras (atum, doce, café).</li>
+                <li><strong>Logística:</strong> Aeroporto perto das 14:15. Balcão abre às 14:50.</li>
+                <li><strong>Bagagem:</strong> Concentra líquidos/peso na mala grande. As 2 pequenas ficam leves.</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- TAB: DOCS -->
+    <main id="tab-docs" class="tab-content">
+        <h2>Documentos e Reservas</h2>
+
+        <div class="card">
+            <a href="https://shopgov4.zetesft.com/TicketGenerationForm.aspx?bsk=10845055&key=0047872E071D0E4C0D7F27F7763188D1874DB7E8" target="_blank" class="doc-item">
+                <div class="doc-info">
+                    <i class="ph-fill ph-file-pdf doc-icon"></i>
+                    <div class="doc-text">
+                        <h3>Recibo EASE (TSA)</h3>
+                        <p>Gil Ribeiro (QnzD9WL9E)</p>
+                    </div>
+                </div>
+                <i class="ph ph-caret-right doc-arrow"></i>
+            </a>
+
+            <a href="https://shopgov4.zetesft.com/TicketGenerationForm.aspx?bsk=10845137&key=244F3AAF7F15A455C2E7AB2DA9080AA5F20698C3" target="_blank" class="doc-item">
+                <div class="doc-info">
+                    <i class="ph-fill ph-file-pdf doc-icon"></i>
+                    <div class="doc-text">
+                        <h3>Recibo EASE (TSA)</h3>
+                        <p>Leonor Álvaro (ykX6v82Ev)</p>
+                    </div>
+                </div>
+                <i class="ph ph-caret-right doc-arrow"></i>
+            </a>
+
+            <a href="public/cartao-embarque-ferry.pdf" target="_blank" class="doc-item">
+                <div class="doc-info">
+                    <i class="ph-fill ph-presentation-chart doc-icon" style="color: #0284c7;"></i>
+                    <div class="doc-text">
+                        <h3>Bilhetes Ferry Interilhas</h3>
+                        <p>Ida (8 Mai) / Volta (11 Mai)</p>
+                    </div>
+                </div>
+                <i class="ph ph-caret-right doc-arrow"></i>
+            </a>
+
+            <a href="public/booking-7-8-maio.pdf" target="_blank" class="doc-item">
+                <div class="doc-info">
+                    <i class="ph-fill ph-house-line doc-icon" style="color: #10b981;"></i>
+                    <div class="doc-text">
+                        <h3>Reserva Casa Senador</h3>
+                        <p>1 Noite (7-8 Maio) - Mindelo</p>
+                    </div>
+                </div>
+                <i class="ph ph-caret-right doc-arrow"></i>
+            </a>
+
+            <a href="public/booking-confirmation.pdf" target="_blank" class="doc-item">
+                <div class="doc-info">
+                    <i class="ph-fill ph-buildings doc-icon" style="color: #10b981;"></i>
+                    <div class="doc-text">
+                        <h3>Reserva Apt. Las Rochas</h3>
+                        <p>3 Noites (11-14 Maio) - Lazareto</p>
+                    </div>
+                </div>
+                <i class="ph ph-caret-right doc-arrow"></i>
+            </a>
+            
+            <!-- Link Alternativo (Fallback sem internet) -->
+            <p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin-top:15px;">
+                Se não houver rede, os PDFs abertos na pasta public/ deverão funcionar da cache do navegador.
+            </p>
+        </div>
+    </main>
+
+    <!-- TAB: TRANSPORTES -->
+    <main id="tab-transporte" class="tab-content">
+        <h2>Guia de Transportes 🚕</h2>
+
+        <div class="card">
+            <h3>São Vicente (Táxis)</h3>
+            <table class="table-precos">
+                <thead>
+                    <tr>
+                        <th>Trajeto</th>
+                        <th>Diurno</th>
+                        <th>Noturno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Centro a Centro</td><td>150 CVE</td><td>200 CVE</td></tr>
+                    <tr><td>Centro a Subúrbio</td><td>200 CVE</td><td>250 CVE</td></tr>
+                    <tr><td>Aeroporto a Centro</td><td colspan="2">1000 CVE</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Santo Antão (Alugueres)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px; margin-bottom: 10px;">
+                Não existem táxis em S. Antão. Usa "Alugueres" coletivos (Hiace). Preços fixos por passageiro.
+            </p>
+            <table class="table-precos">
+                <thead>
+                    <tr>
+                        <th>Trajeto</th>
+                        <th>Preço/Pessoa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Porto Novo ➔ Rib. Grande <br><span style="font-size:0.75rem; color:var(--text-muted);">(Estrada da Corda / Dia 2)</span></td><td>~500 CVE</td></tr>
+                    <tr><td>Porto Novo ➔ Rib. Grande <br><span style="font-size:0.75rem; color:var(--text-muted);">(Litoral / Dia 5)</span></td><td>~400 CVE</td></tr>
+                    <tr><td>Ribeira Grande ➔ P. do Sol</td><td>~50 a 100 CVE</td></tr>
+                    <tr><td>Ribeira Grande ➔ Vale do Paúl</td><td>~100 a 150 CVE</td></tr>
+                    <tr><td>Ribeira Grande ➔ R. da Torre</td><td>~100 CVE</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a class="nav-item active" onclick="switchTab('tab-inicio', this)">
+            <i class="ph ph-house"></i>
+            Início
+        </a>
+        <a class="nav-item" onclick="switchTab('tab-itinerario', this)">
+            <i class="ph ph-map-trifold"></i>
+            Itinerário
+        </a>
+        <a class="nav-item" onclick="switchTab('tab-docs', this)">
+            <i class="ph ph-folder-open"></i>
+            Docs
+        </a>
+        <a class="nav-item" onclick="switchTab('tab-transporte', this)">
+            <i class="ph ph-car"></i>
+            Transportes
+        </a>
+    </nav>
+
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId, element) {
+            // Remove active classes from all nav items
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            // Remove active classes from all contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            
+            // Add active to clicked nav item
+            element.classList.add('active');
+            
+            // Add active to selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Scroll to the top when switching tabs
+            window.scrollTo(0, 0);
+        }
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('SW Registered!', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('SW Registration Failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
