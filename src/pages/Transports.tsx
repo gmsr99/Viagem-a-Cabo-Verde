@@ -52,9 +52,12 @@ const Transports: React.FC = () => {
 
           <div className="converter-card">
             <div className="converter-header">
-              <IonIcon icon={swapHorizontalOutline} />
-              <span>Conversor CVE ↔ EUR</span>
-              <small>1 EUR = {CVE_RATE} CVE (taxa fixa)</small>
+              <div className="converter-title-row">
+                <IonIcon icon={swapHorizontalOutline} />
+                <span>Conversor CVE ↔ EUR</span>
+              </div>
+              <small>1 EUR = {CVE_RATE} CVE</small>
+              <div className="converter-note">(taxa fixa)</div>
             </div>
             <div className="converter-body">
               <div className="converter-field">

@@ -644,6 +644,96 @@ ion-accordion .ion-accordion-toggle-icon {
   border-radius: var(--r-lg);
 }
 
+.converter-header {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.converter-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--text);
+}
+
+.converter-title-row ion-icon {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.converter-title-row span {
+  min-width: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.converter-header small {
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.converter-note {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.converter-body {
+  display: grid;
+  gap: 12px;
+}
+
+.converter-field {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.converter-field label {
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+.converter-field input {
+  width: 100%;
+  min-width: 0;
+  height: 52px;
+  padding: 0 16px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  background: #ffffff;
+  color: #10222f;
+  font-size: 1rem;
+  box-shadow: none;
+}
+
+.converter-result {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.converter-result strong {
+  font-size: 1.2rem;
+}
+
+.converter-result span {
+  color: var(--text-soft);
+}
+
+.converter-placeholder {
+  color: var(--text-soft);
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 680px) {
   .page-shell { padding: 10px 12px 100px; }
@@ -653,6 +743,41 @@ ion-accordion .ion-accordion-toggle-icon {
   .countdown-unit strong { font-size: 1.45rem; }
 
   .section-heading { flex-wrap: wrap; gap: 6px; }
+
+  .converter-card {
+    padding: 14px;
+  }
+
+  .converter-title-row {
+    align-items: flex-start;
+  }
+
+  .converter-title-row span {
+    font-size: 0.92rem;
+  }
+
+  .converter-header small,
+  .converter-note {
+    font-size: 0.82rem;
+  }
+
+  .converter-field {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .converter-field label {
+    font-size: 0.92rem;
+  }
+
+  .converter-field input {
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .converter-result {
+    font-size: 0.96rem;
+  }
 
   ion-card-title { font-size: 1.08rem; }
 }
