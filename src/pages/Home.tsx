@@ -15,7 +15,6 @@ import {
   airplaneOutline,
   bulbOutline,
   checkboxOutline,
-  compassOutline,
   squareOutline,
   sunnyOutline,
   warningOutline
@@ -86,31 +85,13 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className="page-shell">
-          <section className="page-hero">
+          <section className="page-hero page-hero-featured">
             <div className="hero-kicker">
               <IonIcon icon={sunnyOutline} />
               Cabo Verde Escape
             </div>
-            <h1>Atlântico, trilhos e logística sem stress.</h1>
-            <p className="hero-lead">
-              Uma base de viagem pensada para 8 dias entre São Vicente e Santo Antão,
-              com foco em aventura, mar e decisões rápidas no terreno.
-            </p>
 
-            <div className="hero-stats">
-              <div className="stat-card">
-                <strong>8 dias</strong>
-                <span>modo aventura low cost</span>
-              </div>
-              <div className="stat-card">
-                <strong>2 ilhas</strong>
-                <span>Mindelo + vales dramáticos</span>
-              </div>
-              <div className="stat-card">
-                <strong>1 base</strong>
-                <span>alertas e docs sempre à mão</span>
-              </div>
-            </div>
+
 
             {!departed ? (
               <div className="countdown-strip">
@@ -141,10 +122,6 @@ const Home: React.FC = () => {
             )}
 
             <div className="hero-meta">
-              <span className="hero-pill">
-                <IonIcon icon={compassOutline} />
-                São Vicente + Santo Antão
-              </span>
               <span className="hero-pill">
                 <IonIcon icon={airplaneOutline} />
                 maio 2026
