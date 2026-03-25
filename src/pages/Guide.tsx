@@ -17,7 +17,6 @@ type DayEntry = {
   items?: React.ReactNode[];
   highlight?: string;
   defaultOpen?: boolean;
-  upcoming?: boolean;
 };
 
 const days: DayEntry[] = [
@@ -87,7 +86,6 @@ const days: DayEntry[] = [
     title: 'Dia 4: O Vale Vertical',
     location: 'Ribeira da Torre',
     sleep: 'Lar do Viajante (Paul)',
-    upcoming: true,
     boxes: [
       {
         type: 'warn',
@@ -101,7 +99,6 @@ const days: DayEntry[] = [
     title: 'Dia 5: Chill & Transição',
     location: 'Para São Vicente',
     sleep: 'Las Rochas (Mindelo)',
-    upcoming: true,
     boxes: [
       {
         type: 'ferry',
@@ -123,21 +120,18 @@ const days: DayEntry[] = [
     title: 'Dia 6: Tartarugas Freestyle',
     location: 'São Vicente',
     sleep: 'Las Rochas (Mindelo)',
-    upcoming: true,
     items: ['Coletivo para São Pedro na Praça Estrela. Nadar com tartarugas e procurar Deco/Nenass.']
   },
   {
     day: 13, month: 'MAI',
     title: 'Dia 7: Mindelo Profundo',
     location: 'São Vicente',
-    upcoming: true,
     items: ['Mercado de peixe, CNAD e grogue à noite.']
   },
   {
     day: 14, month: 'MAI',
     title: 'Dia 8: Saída do Sistema',
     location: 'São Vicente',
-    upcoming: true,
     boxes: [
       {
         type: 'alert',
@@ -205,35 +199,21 @@ const Guide: React.FC = () => (
           {days.map((entry) => (
             <details
               key={entry.day}
-              className={`day-details${entry.upcoming ? ' upcoming' : ''}`}
+              className="day-details"
               open={entry.defaultOpen}
             >
               <summary className="day-summary">
                 <div className="day-summary-left">
-                  {entry.upcoming ? (
-                    <div className="day-badge-sm">
-                      <span>{entry.day}</span>
-                    </div>
-                  ) : (
-                    <div className={`day-badge${entry.defaultOpen ? ' active' : ''}`}>
-                      <span className="day-badge-month">{entry.month}</span>
-                      <span className="day-badge-num">{entry.day}</span>
-                    </div>
-                  )}
+                  <div className={`day-badge${entry.defaultOpen ? ' active' : ''}`}>
+                    <span className="day-badge-month">{entry.month}</span>
+                    <span className="day-badge-num">{entry.day}</span>
+                  </div>
                   <div className="day-title-block">
-                    {entry.upcoming ? (
-                      <span className="day-upcoming-title">{entry.title}</span>
-                    ) : (
-                      <>
-                        <h3>{entry.title}</h3>
-                        {entry.location && <div className="day-location">{entry.location}</div>}
-                      </>
-                    )}
+                    <h3>{entry.title}</h3>
+                    {entry.location && <div className="day-location">{entry.location}</div>}
                   </div>
                 </div>
-                <span className="material-symbols-outlined day-expand-icon">
-                  {entry.upcoming ? 'add' : 'expand_more'}
-                </span>
+                <span className="material-symbols-outlined day-expand-icon">expand_more</span>
               </summary>
 
               <div className="day-panel">

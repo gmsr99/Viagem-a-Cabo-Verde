@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
-import heroImg from '../assets/hero.png';
 
 const CHECKLIST_KEY = 'cv_checklist';
 
@@ -41,8 +40,6 @@ function useCountdown(target: Date) {
 const Home: React.FC = () => {
   const { days, hours, minutes, seconds } = useCountdown(DEPARTURE);
   const departed = days === 0 && hours === 0 && minutes === 0 && seconds === 0;
-  const totalHours = days * 24 + hours;
-
   const [checked, setChecked] = useState<boolean[]>(() => {
     try {
       const s = localStorage.getItem(CHECKLIST_KEY);
@@ -78,15 +75,33 @@ const Home: React.FC = () => {
 
           {/* ── Hero ── */}
           <section className="hero-section">
-            <img src={heroImg} className="hero-img" alt="Cabo Verde coast" />
+            <img src="/banner.png" className="hero-img" alt="Cabo Verde coast" />
             <div className="hero-gradient" />
             <div className="hero-body">
               <div>
                 <p className="hero-countdown-label">Departure Countdown</p>
                 {!departed ? (
-                  <p className="hero-countdown-value">
-                    {totalHours}:{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-                  </p>
+                  <div className="hero-countdown-units">
+                    <div className="hero-cd-unit">
+                      <span className="hero-cd-num">{days}</span>
+                      <span className="hero-cd-label">dias</span>
+                    </div>
+                    <span className="hero-cd-sep">:</span>
+                    <div className="hero-cd-unit">
+                      <span className="hero-cd-num">{String(hours).padStart(2, '0')}</span>
+                      <span className="hero-cd-label">horas</span>
+                    </div>
+                    <span className="hero-cd-sep">:</span>
+                    <div className="hero-cd-unit">
+                      <span className="hero-cd-num">{String(minutes).padStart(2, '0')}</span>
+                      <span className="hero-cd-label">min</span>
+                    </div>
+                    <span className="hero-cd-sep">:</span>
+                    <div className="hero-cd-unit">
+                      <span className="hero-cd-num">{String(seconds).padStart(2, '0')}</span>
+                      <span className="hero-cd-label">seg</span>
+                    </div>
+                  </div>
                 ) : (
                   <p className="hero-countdown-value">✈️ Boa viagem!</p>
                 )}

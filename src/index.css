@@ -290,6 +290,47 @@ ion-tab-button.tab-selected .tab-lbl {
   font-variant-numeric: tabular-nums;
 }
 
+.hero-countdown-units {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hero-cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-cd-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #fff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-cd-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  margin-top: 3px;
+}
+
+.hero-cd-sep {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
 .hero-flight-card {
   background: rgba(0,0,0,0.4);
   backdrop-filter: blur(12px);
