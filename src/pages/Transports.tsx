@@ -21,9 +21,25 @@ const saAlugueres = [
 ];
 
 const Transports: React.FC = () => {
-  const [cveInput, setCveInput] = useState('1000');
-  const cve = parseFloat(cveInput) || 0;
-  const eur = cve > 0 ? (cve / CVE_RATE).toFixed(2) : '';
+  const [input, setInput] = useState('1000');
+  const [dir, setDir] = useState<'cve-to-eur' | 'eur-to-cve'>('cve-to-eur');
+
+  const num = parseFloat(input) || 0;
+  const result = num > 0
+    ? dir === 'cve-to-eur'
+      ? (num / CVE_RATE).toFixed(2)
+      : (num * CVE_RATE).toFixed(0)
+    : '';
+
+  const swap = () => {
+    setDir(d => d === 'cve-to-eur' ? 'eur-to-cve' : 'cve-to-eur');
+    setInput(result || '');
+  };
+
+  const fromLabel = dir === 'cve-to-eur' ? 'Escudos (CVE)' : 'Euros (EUR)';
+  const toLabel   = dir === 'cve-to-eur' ? 'Euros (EUR)'   : 'Escudos (CVE)';
+  const fromCode  = dir === 'cve-to-eur' ? 'CVE' : 'EUR';
+  const toCode    = dir === 'cve-to-eur' ? 'EUR' : 'CVE';
 
   return (
     <IonPage>
@@ -57,36 +73,38 @@ const Transports: React.FC = () => {
               <span className="converter-rate">Live Rate: {CVE_RATE}</span>
             </div>
 
-            <div className="converter-grid">
+            <div className="converter-fields">
               <div className="converter-field">
-                <label>Escudos (CVE)</label>
+                <label>{fromLabel}</label>
                 <div className="converter-input-wrap">
                   <input
                     className="converter-input"
                     type="number"
                     inputMode="decimal"
-                    placeholder="0.00"
-                    value={cveInput}
-                    onChange={e => setCveInput(e.target.value)}
+                    placeholder="0"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
                   />
-                  <span className="converter-currency">CVE</span>
+                  <span className="converter-currency">{fromCode}</span>
                 </div>
               </div>
 
-              <div className="converter-swap">
-                <span className="material-symbols-outlined">sync_alt</span>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button className="converter-swap" onClick={swap}>
+                  <span className="material-symbols-outlined">sync_alt</span>
+                </button>
               </div>
 
               <div className="converter-field">
-                <label>Euros (EUR)</label>
+                <label>{toLabel}</label>
                 <div className="converter-input-wrap">
                   <input
                     className="converter-input converter-input-result"
                     type="text"
                     readOnly
-                    value={eur || '—'}
+                    value={result || '—'}
                   />
-                  <span className="converter-currency" style={{ color: 'rgba(173,198,255,0.7)' }}>EUR</span>
+                  <span className="converter-currency" style={{ color: 'rgba(173,198,255,0.7)' }}>{toCode}</span>
                 </div>
               </div>
             </div>
