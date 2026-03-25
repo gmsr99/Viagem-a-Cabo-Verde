@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#adc6ff",
+              "secondary": "#c9c6c5",
+              "background": "#131313",
+              "on-surface": "#e5e2e1",
+              "on-primary-container": "#00285c",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "on-error": "#690005",
+              "on-primary": "#002e69",
+              "surface-container-highest": "#353534",
+              "on-tertiary-container": "#412200",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "secondary-fixed": "#e5e2e1",
+              "tertiary-container": "#d47b00",
+              "surface-container-lowest": "#0e0e0e",
+              "primary-fixed-dim": "#adc6ff",
+              "surface-bright": "#3a3939",
+              "tertiary-fixed-dim": "#ffb874",
+              "surface-container": "#201f1f",
+              "primary-fixed": "#d8e2ff",
+              "inverse-primary": "#005bc1",
+              "tertiary": "#ffb874",
+              "outline": "#8b90a0",
+              "surface-container-high": "#2a2a2a",
+              "tertiary-fixed": "#ffdcbf",
+              "on-surface-variant": "#c1c6d7",
+              "surface-container-low": "#1c1b1b",
+              "inverse-on-surface": "#313030",
+              "on-tertiary": "#4b2800",
+              "on-secondary-container": "#b7b4b4",
+              "surface": "#131313",
+              "surface-dim": "#131313",
+              "secondary-container": "#474646",
+              "outline-variant": "#414755",
+              "on-secondary": "#313030",
+              "secondary-fixed-dim": "#c9c6c5",
+              "surface-variant": "#353534",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#004493",
+              "error": "#ffb4ab",
+              "on-secondary-fixed": "#1c1b1b",
+              "on-secondary-fixed-variant": "#474646",
+              "primary-container": "#4b8eff",
+              "error-container": "#93000a",
+              "on-primary-fixed": "#001a41",
+              "on-tertiary-fixed": "#2d1600",
+              "surface-tint": "#adc6ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-header {
+            background: rgba(19, 19, 19, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 glass-header shadow-[0_32px_32px_rgba(173,198,255,0.08)] flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up professional headshot of a traveler with soft lighting and blurred coastal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZeRKarMn_bs64UWN_7BC-ZAGdp9R9pj3d71z-dE8ETH7KEPckea4HplZU8mvrUS-N9MzbypDAv5qbPMActUNrLTkqtR7kEc3mbz_4PzA4h0qX7655h_BENZQyL8sCQl5oVhOfyQleEvul2HicWeLTCPpJvQ1Hxw33CIeYmuwdUl9pUzWTBH4Y9rvZXsnOMRXSbXaaNeqE2NAZend0hGejx7S9WTrDLh7qrTIPmYctsApzH5SB_BCG2hobKsfBzbyrF8ilbmwz75aB"/>
+</div>
+<h1 class="text-xl font-bold font-headline text-primary tracking-tight">Cabo Verde Escape</h1>
+</div>
+<button class="text-[#414755] hover:bg-[#201f1f] transition-colors p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="pt-24 px-6 space-y-10">
+<!-- Page Title & Hero Section -->
+<section class="space-y-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary-container/20 text-tertiary text-[10px] font-medium uppercase tracking-widest border border-tertiary/10">
+<span class="material-symbols-outlined text-sm" data-icon="cloud_off">cloud_off</span>
+                Offline Kit
+            </div>
+<h2 class="text-[3.5rem] leading-[1.1] font-headline font-extrabold tracking-tighter text-on-surface">Documentos</h2>
+<p class="text-on-surface-variant font-medium max-w-[280px]">Your essential travel documents, available even without signal.</p>
+</section>
+<!-- Official Registry Section (External Links) -->
+<section class="space-y-6">
+<h3 class="text-label-sm font-semibold uppercase tracking-widest text-outline">Official Registry</h3>
+<div class="grid grid-cols-1 gap-4">
+<a class="group relative overflow-hidden rounded-xl bg-surface-container-low p-6 transition-all hover:bg-surface-container active:scale-[0.98]" href="#">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">TSA / EASE Receipts</h4>
+<p class="text-xs text-on-surface-variant">External Official Portal</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="open_in_new">open_in_new</span>
+</div>
+</a>
+</div>
+</section>
+<!-- Local Tickets Bento Grid -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-label-sm font-semibold uppercase tracking-widest text-outline">Tickets &amp; Bookings</h3>
+<span class="text-[10px] font-medium bg-surface-container-high px-2 py-1 rounded text-primary">4 FILES</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Card 1: Ferry -->
+<div class="col-span-2 group relative bg-surface-container-low rounded-xl p-5 flex flex-col justify-between min-h-[140px] hover:bg-surface-container-high transition-all active:scale-[0.99]">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="directions_boat">directions_boat</span>
+<span class="material-symbols-outlined text-outline" data-icon="download_done">download_done</span>
+</div>
+<div>
+<h4 class="font-bold text-lg text-on-surface">Cartão de Embarque Ferry</h4>
+<p class="text-xs text-on-surface-variant">Interilhas - PDF Document</p>
+</div>
+<div class="absolute right-4 bottom-4 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</div>
+</div>
+<!-- Card 2: Casa Senador -->
+<div class="group bg-surface-container-low rounded-xl p-5 flex flex-col gap-4 hover:bg-surface-container-high transition-all active:scale-[0.97]">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="hotel">hotel</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface leading-tight">Booking May 7-8</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mt-1">Casa Senador</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2">
+<span class="text-[10px] text-outline">2.4 MB</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="open_in_full">open_in_full</span>
+</div>
+</div>
+<!-- Card 3: Lar do Viajante -->
+<div class="group bg-surface-container-low rounded-xl p-5 flex flex-col gap-4 hover:bg-surface-container-high transition-all active:scale-[0.97]">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="assignment_turned_in">assignment_turned_in</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface leading-tight">Lar do Viajante</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider mt-1">Confirmation</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2">
+<span class="text-[10px] text-outline">1.1 MB</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="open_in_full">open_in_full</span>
+</div>
+</div>
+<!-- Card 4: Las Rochas -->
+<div class="col-span-2 group flex items-center gap-4 bg-surface-container-low rounded-xl p-4 hover:bg-surface-container-high transition-all active:scale-[0.98]">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Las Rochas Resort" class="w-full h-full object-cover" data-alt="Luxury beachfront resort with stone architecture and turquoise pool under twilight sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6vwH_jzZdPYxIp_AXeIKLAA99MlnfSoM8zF2jlT6aJ3R33PZmwunx-9arxDxdonnzn4iF5hpJuTdiAVdjyJoCn7qHzW_Cf0UW0CNIe3ZZBxUrzG6cPqF16YrikmUpPbX9kV9_Ghniv6ZEufxJIfox0F7ZgCkrf8LwQ5lyOqIsEwfAJMs63u0IY3Ceen8Fvzl4_NmCE_RBYA1cNcOl_lButDhclX9gCOsXEXbLN505YzNo8ooqz6-QEQmjieuZoO4kpRqBZlM2VFBD"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Booking Las Rochas</h4>
+<p class="text-xs text-on-surface-variant">Stay Voucher &amp; Directions</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Map Quick Access -->
+<section class="relative h-48 rounded-2xl overflow-hidden shadow-2xl">
+<img alt="Cabo Verde Map" class="w-full h-full object-cover" data-alt="Detailed vintage-style topographical map of Cape Verde islands with soft warm lighting" data-location="Cabo Verde" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJoUxpbgZ9-3S3X88Nq36z07OMx8n93sZfnJ2BZWJIpUeN5Me6y59gon3gUqJHdyO7Auln328Hj05gO0VXLWK_alul1yGZh4MD0ROh3rfn2GTx3cbtKvrGPV2xfLEjg61zm80ocQcwMpugTF4G8jsW9ggjELnXAueFsAWIvjuEGTAR5kSD6U14XDBR6RKzQJ9mqlQHlOtcUsbHAzWg2DKER1Qeb5QtrGqk8ijlWaTH6wC64PHgY0KVfN8vyt6cI55HBZOR61rvgmcw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="bg-primary/90 text-on-primary-container px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-sm" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                    Island Offline Map
+                </div>
+</div>
+</section>
+</main>
+<!-- Toast Notification (Simulated state) -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[60] w-[calc(100%-3rem)] max-w-sm">
+<div class="bg-surface-container-highest text-on-surface px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-outline-variant/20 animate-pulse">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#adc6ff]"></div>
+<span class="text-sm font-medium">A abrir: <span class="text-primary">Cartão de Embarque Ferry</span></span>
+<span class="material-symbols-outlined text-xs ml-auto text-outline" data-icon="close">close</span>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl glass-header shadow-[0_-8px_24px_rgba(0,0,0,0.2)] flex justify-around items-center px-4 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-[#414755] hover:text-[#adc6ff] transition-all active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-inter text-[10px] font-medium uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#414755] hover:text-[#adc6ff] transition-all active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-inter text-[10px] font-medium uppercase tracking-widest mt-1">Guide</span>
+</a>
+<!-- Active Tab: Docs -->
+<a class="flex flex-col items-center justify-center text-[#adc6ff] after:content-[''] after:w-1 after:h-1 after:bg-[#ffb874] after:rounded-full after:mt-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-inter text-[10px] font-medium uppercase tracking-widest mt-1">Docs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#414755] hover:text-[#adc6ff] transition-all active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="font-inter text-[10px] font-medium uppercase tracking-widest mt-1">Transports</span>
+</a>
+</nav>
+</body></html>

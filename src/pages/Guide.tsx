@@ -1,279 +1,310 @@
-import type { ReactNode } from 'react';
-import {
-  IonAccordion,
-  IonAccordionGroup,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonTitle,
-  IonToolbar
-} from '@ionic/react';
-import { bedOutline, trailSignOutline } from 'ionicons/icons';
+import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
 
-type GuideBox = {
-  className: string;
+type DayBox = {
+  type: 'voo' | 'ferry' | 'ok' | 'warn' | 'alert';
   tag?: string;
-  tagLabel?: string;
-  body: ReactNode;
+  body: React.ReactNode;
 };
 
-type GuideDay = {
-  id: string;
-  day: string;
+type DayEntry = {
+  day: number;
+  month: string;
   title: string;
+  location?: string;
   sleep?: string;
-  boxes?: GuideBox[];
-  items?: ReactNode[];
+  sleepIcon?: string;
+  boxes?: DayBox[];
+  items?: React.ReactNode[];
+  highlight?: string;
+  defaultOpen?: boolean;
+  upcoming?: boolean;
 };
 
-const days: GuideDay[] = [
+const days: DayEntry[] = [
   {
-    id: 'day-1',
-    day: 'Dia 1 • 7 de Maio',
-    title: 'Aterragem Tática',
-    sleep: 'São Vicente (Casa Senador)',
+    day: 7, month: 'MAI',
+    title: 'Dia 1: Chegada',
+    location: 'Mindelo, São Vicente',
+    sleep: 'Casa Senador',
+    defaultOpen: true,
     boxes: [
       {
-        className: 'box-voo',
-        tag: 'tag-voo',
-        tagLabel: 'Voo Ida',
-        body: (
-          <>
-            <strong>EJU7581</strong> (LIS → VXE)
-            <br />
-            13:40 ▸ 16:05
-          </>
-        )
+        type: 'voo',
+        tag: 'Voo Ida',
+        body: <><strong>EJU7581</strong> (LIS → VXE)<br />13:40 ▸ 16:05</>
       },
       {
-        className: 'box-ok',
-        tag: 'tag-ok',
-        tagLabel: 'Confirmada',
+        type: 'ok',
+        tag: 'Confirmada',
+        body: <><strong>Casa Senador (Mindelo)</strong><br />Pagamento: dinheiro local (~5.952 CVE)</>
+      }
+    ],
+    items: [
+      <><strong>Transporte:</strong> aluguer (100 CVE) ou táxi (1000 CVE)</>,
+      <><strong>Vibe check:</strong> pôr do sol na Praia da Laginha</>,
+      <><strong>Jantar:</strong> Casa da Morna</>,
+    ]
+  },
+  {
+    day: 8, month: 'MAI',
+    title: 'Dia 2: A Subida no Caos',
+    location: 'Para Santo Antão',
+    sleep: 'Lar do Viajante (Paul)',
+    boxes: [
+      {
+        type: 'ferry',
+        tag: 'Ferry Ida',
         body: (
-          <>
-            <strong>Casa Senador (Mindelo)</strong>
-            <br />
-            Pagamento: dinheiro local (~5.952 CVE)
-          </>
+          <div className="day-ferry-times">
+            <div>
+              <div className="info-label">Ferry Chiquinho-BL</div>
+              <div className="check-in">Check-in: 06:30</div>
+            </div>
+            <div className="departure">Partida: 08:00</div>
+          </div>
         )
       }
     ],
     items: [
-      <>
-        <strong>Transporte:</strong> aluguer (100 CVE) ou táxi (1000 CVE).
-      </>,
-      <>
-        <strong>Vibe check:</strong> pôr do sol na Praia da Laginha.
-      </>,
-      <>
-        <strong>Jantar:</strong> Casa da Morna.
-      </>
+      <><strong>Hiace:</strong> Estrada da Corda (~500 CVE), sair na Cova</>,
+      <><strong>Trekking:</strong> descida até Vale do Paúl (3/4h)</>,
+      <><strong>Check-in 15:00:</strong> Ribeira Grande</>,
     ]
   },
   {
-    id: 'day-2',
-    day: 'Dia 2 • 8 de Maio',
-    title: 'A Subida no Caos',
-    sleep: 'Santo Antão (Lar do Viajante)',
+    day: 9, month: 'MAI',
+    title: 'Dia 3: A Besta Costeira',
+    location: 'Caminhada Costeira',
+    sleep: 'Lar do Viajante (Paul)',
+    highlight: 'Trilho épico 14 km: Ponta do Sol → Cruzinha',
+    items: [
+      <>Almoço em Fontainhas (vista mundialmente reconhecida)</>,
+      <>Mergulho em Cruzinha da Garça</>,
+    ]
+  },
+  {
+    day: 10, month: 'MAI',
+    title: 'Dia 4: O Vale Vertical',
+    location: 'Ribeira da Torre',
+    sleep: 'Lar do Viajante (Paul)',
+    upcoming: true,
     boxes: [
       {
-        className: 'box-voo',
-        tag: 'tag-ferry',
-        tagLabel: 'Ferry Ida',
-        body: (
-          <>
-            <strong>Chiquinho-BL</strong> (SV → Porto Novo)
-            <br />
-            08:00 (check-in 06:30)
-          </>
-        )
-      }
-    ],
-    items: [
-      <>
-        <strong>Hiace:</strong> Estrada da Corda (~500 CVE), sair na Cova.
-      </>,
-      <>
-        <strong>Trekking:</strong> descida até Vale do Paúl (3/4h).
-      </>,
-      <>
-        <strong>Check-in 15:00:</strong> Ribeira Grande.
-      </>
-    ]
-  },
-  {
-    id: 'day-3',
-    day: 'Dia 3 • 9 de Maio',
-    title: 'A Besta Costeira',
-    sleep: 'Santo Antão (Lar do Viajante)',
-    items: [
-      <>
-        <strong>Trilho épico 14 km:</strong> Ponta do Sol → Cruzinha.
-      </>,
-      <>
-        <strong>Rota:</strong> Fontainhas, Corvo e Formiguinhas.
-      </>
-    ]
-  },
-  {
-    id: 'day-4',
-    day: 'Dia 4 • 10 de Maio',
-    title: 'O Vale Vertical',
-    sleep: 'Santo Antão (Lar do Viajante)',
-    boxes: [
-      {
-        className: 'box-warn',
-        body: (
-          <>
-            <strong>Ação:</strong> avisar os donos das Las Rochas da hora exata do ferry
-            de amanhã.
-          </>
-        )
+        type: 'warn',
+        body: <><strong>Ação:</strong> avisar os donos das Las Rochas da hora exata do ferry de amanhã</>
       }
     ],
     items: ['Ribeira da Torre (Xoxo). Banhos, cascatas e ritmo mais solto.']
   },
   {
-    id: 'day-5',
-    day: 'Dia 5 • 11 de Maio',
-    title: 'Chill & Transição',
-    sleep: 'São Vicente (Las Rochas)',
+    day: 11, month: 'MAI',
+    title: 'Dia 5: Chill & Transição',
+    location: 'Para São Vicente',
+    sleep: 'Las Rochas (Mindelo)',
+    upcoming: true,
     boxes: [
       {
-        className: 'box-voo',
-        tag: 'tag-ferry',
-        tagLabel: 'Ferry Volta',
+        type: 'ferry',
+        tag: 'Ferry Volta',
         body: (
-          <>
-            <strong>Chiquinho-BL</strong> (Porto Novo → SV)
-            <br />
-            Partida: 17:00 (check-in 15:30)
-          </>
+          <div className="day-ferry-times">
+            <div>
+              <div className="info-label">Chiquinho-BL (Porto Novo → SV)</div>
+              <div className="check-in">Check-in: 15:30</div>
+            </div>
+            <div className="departure">Partida: 17:00</div>
+          </div>
         )
       }
     ]
   },
   {
-    id: 'day-6',
-    day: 'Dia 6 • 12 de Maio',
-    title: 'Tartarugas Freestyle',
-    sleep: 'São Vicente (Las Rochas)',
-    items: [
-      'Coletivo para São Pedro na Praca Estrela. Nadar com tartarugas e procurar Deco/Nenass.'
-    ]
+    day: 12, month: 'MAI',
+    title: 'Dia 6: Tartarugas Freestyle',
+    location: 'São Vicente',
+    sleep: 'Las Rochas (Mindelo)',
+    upcoming: true,
+    items: ['Coletivo para São Pedro na Praça Estrela. Nadar com tartarugas e procurar Deco/Nenass.']
   },
   {
-    id: 'day-7',
-    day: 'Dia 7 • 13 de Maio',
-    title: 'Mindelo Profundo',
-    items: ['Mercado de peixe, CNAD e grogue a noite.']
+    day: 13, month: 'MAI',
+    title: 'Dia 7: Mindelo Profundo',
+    location: 'São Vicente',
+    upcoming: true,
+    items: ['Mercado de peixe, CNAD e grogue à noite.']
   },
   {
-    id: 'day-8',
-    day: 'Dia 8 • 14 de Maio',
-    title: 'Saída do Sistema',
+    day: 14, month: 'MAI',
+    title: 'Dia 8: Saída do Sistema',
+    location: 'São Vicente',
+    upcoming: true,
     boxes: [
       {
-        className: 'box-alert',
-        tag: 'tag-voo',
-        tagLabel: 'Voo Regresso',
-        body: (
-          <>
-            <strong>EJU7582</strong> (VXE → LIS)
-            <br />
-            16:50 ▸ 23:00 (bagagem fecha 16:10)
-          </>
-        )
+        type: 'alert',
+        tag: 'Voo Regresso',
+        body: <><strong>EJU7582</strong> (VXE → LIS)<br />16:50 ▸ 23:00 (bagagem fecha 16:10)</>
       }
     ]
   }
 ];
 
-const Guide: React.FC = () => {
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Itinerário</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <div className="page-shell">
-          <section className="page-hero">
-            <div className="hero-kicker">
-              <IonIcon icon={trailSignOutline} />
-              Roteiro de Ilha
-            </div>
-            <h2>Do Mindelo a Santo Antão, dia a dia.</h2>
-            <p className="hero-lead">
-              Um percurso pensado para consulta rápida, com o essencial de cada etapa
-              sempre visível quando precisarem.
-            </p>
-            <div className="hero-meta">
-              <span className="hero-pill">7 a 14 de maio</span>
-              <span className="hero-pill">acordeão por dia</span>
-            </div>
-          </section>
-
-          <div className="section-heading">
-            <h2>Mapa emocional da semana</h2>
-            <span className="section-chip">8 etapas</span>
-          </div>
-          <p className="section-copy">
-            Cada dia abre num painel próprio: título claro para navegar depressa,
-            conteúdo escuro para consultar detalhes sem ruído.
-          </p>
-
-          <IonAccordionGroup className="itinerary-accordion" expand="inset" value="day-1">
-            {days.map((entry) => (
-              <IonAccordion key={entry.id} value={entry.id}>
-                <IonItem slot="header" lines="none" className="itinerary-header">
-                  <IonLabel>
-                    <div className="itinerary-day">{entry.day}</div>
-                    <div className="itinerary-title">{entry.title}</div>
-                  </IonLabel>
-                </IonItem>
-
-                <div className="itinerary-panel" slot="content">
-                  {entry.sleep ? (
-                    <div className="dormida">
-                      <IonIcon icon={bedOutline} color="primary" size="large" />
-                      <div>
-                        Dormida: <strong>{entry.sleep}</strong>
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {entry.boxes?.map((box, index) => (
-                    <div key={`${entry.id}-box-${index}`} className={`info-box ${box.className}`}>
-                      {box.tag && box.tagLabel ? (
-                        <>
-                          <div className={`tag ${box.tag}`}>{box.tagLabel}</div>
-                          <br />
-                        </>
-                      ) : null}
-                      {box.body}
-                    </div>
-                  ))}
-
-                  {entry.items?.length ? (
-                    <ul className="itinerary-list">
-                      {entry.items.map((item, index) => (
-                        <li key={`${entry.id}-item-${index}`}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              </IonAccordion>
-            ))}
-          </IonAccordionGroup>
-        </div>
-      </IonContent>
-    </IonPage>
-  );
+const boxColors: Record<string, string> = {
+  voo:   'rgba(173,198,255,0.08)',
+  ferry: 'rgba(173,198,255,0.08)',
+  ok:    'rgba(110,217,176,0.08)',
+  warn:  'rgba(255,184,116,0.1)',
+  alert: 'rgba(255,180,171,0.08)',
 };
+const boxBorders: Record<string, string> = {
+  voo:   'rgba(173,198,255,0.22)',
+  ferry: 'rgba(173,198,255,0.3)',
+  ok:    'rgba(110,217,176,0.22)',
+  warn:  'rgba(255,184,116,0.25)',
+  alert: 'rgba(255,180,171,0.2)',
+};
+const boxIconColors: Record<string, string> = {
+  voo:   '#adc6ff',
+  ferry: '#adc6ff',
+  ok:    '#6ed9b0',
+  warn:  '#ffb874',
+  alert: '#ffb4ab',
+};
+const boxIcons: Record<string, string> = {
+  voo:   'flight_takeoff',
+  ferry: 'directions_boat',
+  ok:    'check_circle',
+  warn:  'warning',
+  alert: 'flight_land',
+};
+
+const Guide: React.FC = () => (
+  <IonPage>
+    <IonHeader>
+      <IonToolbar>
+        <div className="cv-toolbar">
+          <span className="cv-app-title">Cabo Verde Escape</span>
+          <button className="cv-settings-btn">
+            <span className="material-symbols-outlined">settings</span>
+          </button>
+        </div>
+      </IonToolbar>
+    </IonHeader>
+
+    <IonContent fullscreen>
+      <div className="page-shell">
+
+        {/* Hero */}
+        <div className="guide-hero">
+          <span className="section-eyebrow">Itinerário</span>
+          <h1 className="guide-title">Aventura<br />nas Ilhas</h1>
+          <p className="guide-subtitle">De 7 a 14 de maio. Uma jornada épica entre vulcões, trilhos costeiros e a alma da Morna.</p>
+        </div>
+
+        {/* Day accordion list */}
+        <div className="day-list">
+          {days.map((entry) => (
+            <details
+              key={entry.day}
+              className={`day-details${entry.upcoming ? ' upcoming' : ''}`}
+              open={entry.defaultOpen}
+            >
+              <summary className="day-summary">
+                <div className="day-summary-left">
+                  {entry.upcoming ? (
+                    <div className="day-badge-sm">
+                      <span>{entry.day}</span>
+                    </div>
+                  ) : (
+                    <div className={`day-badge${entry.defaultOpen ? ' active' : ''}`}>
+                      <span className="day-badge-month">{entry.month}</span>
+                      <span className="day-badge-num">{entry.day}</span>
+                    </div>
+                  )}
+                  <div className="day-title-block">
+                    {entry.upcoming ? (
+                      <span className="day-upcoming-title">{entry.title}</span>
+                    ) : (
+                      <>
+                        <h3>{entry.title}</h3>
+                        {entry.location && <div className="day-location">{entry.location}</div>}
+                      </>
+                    )}
+                  </div>
+                </div>
+                <span className="material-symbols-outlined day-expand-icon">
+                  {entry.upcoming ? 'add' : 'expand_more'}
+                </span>
+              </summary>
+
+              <div className="day-panel">
+                {/* Sleep */}
+                {entry.sleep && (
+                  <div className="day-info-row">
+                    <span className="material-symbols-outlined" style={{ color: '#ffb874', fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}>bed</span>
+                    <div>
+                      <div className="info-label">Dormida</div>
+                      <div className="info-value">{entry.sleep}</div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Boxes */}
+                {entry.boxes?.map((box, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: boxColors[box.type],
+                      border: `1px solid ${boxBorders[box.type]}`,
+                      borderRadius: '14px',
+                      padding: '14px 16px',
+                    }}
+                  >
+                    {box.tag && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                        <span
+                          className="material-symbols-outlined"
+                          style={{ fontSize: '18px', color: boxIconColors[box.type] }}
+                        >{boxIcons[box.type]}</span>
+                        <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: boxIconColors[box.type] }}>{box.tag}</span>
+                      </div>
+                    )}
+                    <div style={{ fontSize: '0.875rem', color: '#e5e2e1', lineHeight: 1.5 }}>{box.body}</div>
+                  </div>
+                ))}
+
+                {/* Highlight */}
+                {entry.highlight && (
+                  <div className="day-highlight">
+                    <div className="day-highlight-label">Highlight do Dia</div>
+                    <div className="day-highlight-text">{entry.highlight}</div>
+                  </div>
+                )}
+
+                {/* Items */}
+                {entry.items && entry.items.length > 0 && (
+                  <div className="day-items">
+                    {entry.items.map((item, idx) => (
+                      <div key={idx} className="day-item">{item}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+
+        {/* Offline badge */}
+        <div className="offline-badge">
+          <div className="offline-badge-title">
+            <span className="material-symbols-outlined">offline_pin</span>
+            Modo Offline Ativo
+          </div>
+          <p>Todo o itinerário e mapas estão disponíveis sem conexão de dados para garantir que nunca se perca nos trilhos.</p>
+        </div>
+
+      </div>
+    </IonContent>
+  </IonPage>
+);
 
 export default Guide;

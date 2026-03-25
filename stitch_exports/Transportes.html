@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#adc6ff",
+              "secondary": "#c9c6c5",
+              "background": "#131313",
+              "on-surface": "#e5e2e1",
+              "on-primary-container": "#00285c",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "on-error": "#690005",
+              "on-primary": "#002e69",
+              "surface-container-highest": "#353534",
+              "on-tertiary-container": "#412200",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "secondary-fixed": "#e5e2e1",
+              "tertiary-container": "#d47b00",
+              "surface-container-lowest": "#0e0e0e",
+              "primary-fixed-dim": "#adc6ff",
+              "surface-bright": "#3a3939",
+              "tertiary-fixed-dim": "#ffb874",
+              "surface-container": "#201f1f",
+              "primary-fixed": "#d8e2ff",
+              "inverse-primary": "#005bc1",
+              "tertiary": "#ffb874",
+              "outline": "#8b90a0",
+              "surface-container-high": "#2a2a2a",
+              "tertiary-fixed": "#ffdcbf",
+              "on-surface-variant": "#c1c6d7",
+              "surface-container-low": "#1c1b1b",
+              "inverse-on-surface": "#313030",
+              "on-tertiary": "#4b2800",
+              "on-secondary-container": "#b7b4b4",
+              "surface": "#131313",
+              "surface-dim": "#131313",
+              "secondary-container": "#474646",
+              "outline-variant": "#414755",
+              "on-secondary": "#313030",
+              "secondary-fixed-dim": "#c9c6c5",
+              "surface-variant": "#353534",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#004493",
+              "error": "#ffb4ab",
+              "on-secondary-fixed": "#1c1b1b",
+              "on-secondary-fixed-variant": "#474646",
+              "primary-container": "#4b8eff",
+              "error-container": "#93000a",
+              "on-primary-fixed": "#001a41",
+              "on-tertiary-fixed": "#2d1600",
+              "surface-tint": "#adc6ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { background-color: #131313; color: #e5e2e1; -webkit-font-smoothing: antialiased; }
+      .glass-card { background: rgba(28, 27, 27, 0.7); backdrop-filter: blur(20px); }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl dark:bg-[#131313]/70 shadow-[0_32px_32px_rgba(173,198,255,0.08)] flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Professional headshot of a traveler with a friendly expression in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPgC24pEcHhmJyOSn4kDiqnHukEBH_6b3P6P0S9Ur3ZVISdkKYun9ZKQN2-cO_ZrFTg8hQGPjox7ZRVkkJ6QsRgXOB5jsxZOpMv4KFA4zLl4yJyyi4129KMB6ByfX8m-F9QtloH3bTaGNjm9g11C18VmQc0hz8no-9XOL7Y-PhrvqH3nxJoBL4Vtz4WkzRQXPxo4m0Um70jYSRO54Gg1NBWwJ4pTM01AXfNkfLCGc3Va-N8T_h2Xu-BtxS9wUg7Pf2GPGkQsBhbiLb"/>
+</div>
+<span class="text-xl font-bold font-headline text-[#adc6ff] tracking-tight">Cabo Verde Escape</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#201f1f] transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[#adc6ff]">settings</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-4xl mx-auto space-y-12">
+<!-- Hero Section -->
+<section class="space-y-4">
+<h1 class="text-5xl md:text-6xl font-headline font-extrabold tracking-tighter text-on-surface">
+                Transportes <br/><span class="text-primary">&amp; Moeda</span>
+</h1>
+<p class="text-on-surface-variant max-w-md font-medium text-lg">
+                Your essential guide to navigating the islands and managing your Escudos with ease.
+            </p>
+</section>
+<!-- Currency Converter Bento Item -->
+<section class="bg-surface-container-low rounded-[2rem] p-8 space-y-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-headline font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">payments</span>
+                    Conversor de Moeda
+                </h2>
+<span class="text-xs font-label uppercase tracking-widest text-outline">Live Rate: 110.265</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+<div class="space-y-2">
+<label class="block text-sm font-label text-on-surface-variant ml-1">Escudos (CVE)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-2xl py-5 px-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/30 transition-all placeholder:text-outline/50" placeholder="0.00" type="number" value="1000"/>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 font-bold text-outline">CVE</div>
+</div>
+</div>
+<div class="flex justify-center md:pt-6">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shadow-lg shadow-primary/20 rotate-90 md:rotate-0">
+<span class="material-symbols-outlined text-on-primary-container">sync_alt</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-label text-on-surface-variant ml-1">Euros (EUR)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-2xl py-5 px-6 text-2xl font-headline font-bold text-primary transition-all cursor-default" readonly="" type="text" value="9.07"/>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 font-bold text-primary/70">EUR</div>
+</div>
+</div>
+</div>
+<p class="text-[10px] text-center text-outline uppercase tracking-[0.2em] pt-4">Fixed exchange rate established by the Central Bank</p>
+</section>
+<!-- São Vicente Section -->
+<section class="space-y-6">
+<div class="flex items-end justify-between px-2">
+<div>
+<span class="text-tertiary font-label text-xs uppercase tracking-widest font-bold">Island Guide</span>
+<h3 class="text-3xl font-headline font-bold text-on-surface">São Vicente</h3>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-4xl">local_taxi</span>
+</div>
+<div class="bg-surface-container-low rounded-[2rem] overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50">
+<th class="py-5 px-6 text-xs font-label uppercase tracking-widest text-outline">Destination</th>
+<th class="py-5 px-6 text-xs font-label uppercase tracking-widest text-outline text-right">Day (06-21h)</th>
+<th class="py-5 px-6 text-xs font-label uppercase tracking-widest text-outline text-right">Night (21-06h)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-5 px-6 font-medium text-on-surface">Mindelo Center</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-on-surface">150 CVE</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-primary">200 CVE</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-5 px-6 font-medium text-on-surface">Suburbs</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-on-surface">200 CVE</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-primary">250 CVE</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-5 px-6 font-medium text-on-surface">Cesária Évora Airport</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-on-surface">800 CVE</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-primary">1000 CVE</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="py-5 px-6 font-medium text-on-surface">Baía das Gatas</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-on-surface">1200 CVE</td>
+<td class="py-5 px-6 text-right font-headline font-bold text-primary">1500 CVE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Santo Antão Section -->
+<section class="space-y-6">
+<div class="flex items-end justify-between px-2">
+<div>
+<span class="text-tertiary font-label text-xs uppercase tracking-widest font-bold">Shared Transport</span>
+<h3 class="text-3xl font-headline font-bold text-on-surface">Santo Antão</h3>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-4xl">airport_shuttle</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Aluguer Card 1 -->
+<div class="bg-surface-container-low p-6 rounded-[2rem] border-l-4 border-primary flex items-center justify-between group hover:bg-surface-container transition-all">
+<div>
+<p class="text-xs font-label uppercase tracking-widest text-outline mb-1">Porto Novo to</p>
+<h4 class="text-xl font-headline font-bold text-on-surface">Ribeira Grande</h4>
+</div>
+<div class="text-right">
+<span class="block text-2xl font-headline font-extrabold text-primary">450 CVE</span>
+<span class="text-[10px] text-outline uppercase font-bold">Standard Rate</span>
+</div>
+</div>
+<!-- Aluguer Card 2 -->
+<div class="bg-surface-container-low p-6 rounded-[2rem] border-l-4 border-tertiary flex items-center justify-between group hover:bg-surface-container transition-all">
+<div>
+<p class="text-xs font-label uppercase tracking-widest text-outline mb-1">Porto Novo to</p>
+<h4 class="text-xl font-headline font-bold text-on-surface">Vale do Paúl</h4>
+</div>
+<div class="text-right">
+<span class="block text-2xl font-headline font-extrabold text-primary">400 CVE</span>
+<span class="text-[10px] text-outline uppercase font-bold">Via Eito/Passagem</span>
+</div>
+</div>
+<!-- Aluguer Card 3 -->
+<div class="bg-surface-container-low p-6 rounded-[2rem] border-l-4 border-primary flex items-center justify-between group hover:bg-surface-container transition-all">
+<div>
+<p class="text-xs font-label uppercase tracking-widest text-outline mb-1">Porto Novo to</p>
+<h4 class="text-xl font-headline font-bold text-on-surface">Ponta do Sol</h4>
+</div>
+<div class="text-right">
+<span class="block text-2xl font-headline font-extrabold text-primary">500 CVE</span>
+<span class="text-[10px] text-outline uppercase font-bold">Coastal Route</span>
+</div>
+</div>
+<!-- Aluguer Card 4 -->
+<div class="bg-surface-container-low p-6 rounded-[2rem] border-l-4 border-tertiary flex items-center justify-between group hover:bg-surface-container transition-all">
+<div>
+<p class="text-xs font-label uppercase tracking-widest text-outline mb-1">Porto Novo to</p>
+<h4 class="text-xl font-headline font-bold text-on-surface">Tarrafal</h4>
+</div>
+<div class="text-right">
+<span class="block text-2xl font-headline font-extrabold text-primary">700 CVE</span>
+<span class="text-[10px] text-outline uppercase font-bold">4x4 Collective</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Tip Card -->
+<div class="bg-tertiary/10 p-8 rounded-[2rem] border border-tertiary/20 flex flex-col md:flex-row items-center gap-6">
+<div class="w-16 h-16 shrink-0 rounded-2xl bg-tertiary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-3xl">lightbulb</span>
+</div>
+<div>
+<h4 class="text-xl font-headline font-bold text-tertiary mb-1">Traveler Pro-Tip</h4>
+<p class="text-on-surface-variant font-medium">Always carry small Escudo denominations (100, 200, 500) for "Alugueres." While many businesses accept Euros, the exchange rate used is often 1 EUR = 100 CVE, costing you about 10% more.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-surface/70 backdrop-blur-xl dark:bg-[#131313]/70 flex justify-around items-center px-4 py-3 pb-safe shadow-[0_-8px_24px_rgba(0,0,0,0.2)]">
+<a class="flex flex-col items-center justify-center text-[#414755] hover:text-[#adc6ff] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label text-[10px] font-medium uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#414755] hover:text-[#adc6ff] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label text-[10px] font-medium uppercase tracking-widest">Guide</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#414755] hover:text-[#adc6ff] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label text-[10px] font-medium uppercase tracking-widest">Docs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adc6ff] after:content-[''] after:w-1 after:h-1 after:bg-[#ffb874] after:rounded-full after:mt-1 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="font-label text-[10px] font-medium uppercase tracking-widest">Transports</span>
+</a>
+</nav>
+</body></html>
