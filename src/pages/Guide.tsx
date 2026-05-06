@@ -40,9 +40,10 @@ const days: DayEntry[] = [
       }
     ],
     items: [
-      <><strong>Transporte:</strong> aluguer (100 CVE) ou táxi (1000 CVE)</>,
-      <><strong>Vibe check:</strong> pôr do sol na Praia da Laginha</>,
-      <><strong>Jantar:</strong> Casa da Morna</>,
+      <><strong>Transporte:</strong> aluguer (100 CVE) ou táxi (~1.000 CVE) do aeroporto ao centro</>,
+      <><strong>ATM:</strong> levantar CVE no aeroporto ou BCA em Mindelo — bancos fecham às 15h</>,
+      <><strong>Pôr do sol:</strong> Praia da Laginha, a pé do centro (15 min)</>,
+      <><strong>Jantar:</strong> Casa da Morna by Buxa — culinária cabo-verdiana + música ao vivo todas as noites. Ranked #2 em Mindelo. Não precisa reserva, mas ir antes das 20h.</>,
     ]
   },
   {
@@ -50,6 +51,7 @@ const days: DayEntry[] = [
     title: 'Dia 2: A Subida no Caos',
     location: 'Para Santo Antão',
     sleep: 'Lar do Viajante (Paul)',
+    highlight: 'Estrada da Corda — 46 km de asfalto em suspensão. Uma das estradas de montanha mais dramáticas do mundo, talhada na rocha viva.',
     boxes: [
       {
         type: 'ferry',
@@ -63,12 +65,17 @@ const days: DayEntry[] = [
             <div className="departure">Partida: 08:00</div>
           </div>
         )
+      },
+      {
+        type: 'warn',
+        body: <>Os <strong>coletivos para a Cova saem entre 08:30–09:30</strong> de Porto Novo e não há mais depois. Apanhar imediatamente ao chegar.</>
       }
     ],
     items: [
-      <><strong>Hiace:</strong> Estrada da Corda (~500 CVE), sair na Cova</>,
-      <><strong>Trekking:</strong> descida até Vale do Paúl (3/4h)</>,
-      <><strong>Check-in 15:00:</strong> Ribeira Grande</>,
+      <><strong>Hiace Estrada da Corda:</strong> ~500 CVE por pessoa, sentar do lado direito para a melhor vista</>,
+      <><strong>Trekking:</strong> descida do Cova (~1.100 m) até Vale do Paúl — 3/4h por entre bananeiras e cana de açúcar</>,
+      <><strong>Check-in 15:00</strong> no Lar do Viajante, Ribeira Grande</>,
+      <><strong>Jantar:</strong> perguntar no hostel — oferta local simples e honesta</>,
     ]
   },
   {
@@ -76,10 +83,25 @@ const days: DayEntry[] = [
     title: 'Dia 3: A Besta Costeira',
     location: 'Caminhada Costeira',
     sleep: 'Lar do Viajante (Paul)',
-    highlight: 'Trilho épico 14 km: Ponta do Sol → Cruzinha',
+    highlight: 'Fontainhas — reconhecida pela National Geographic como uma das aldeias com vistas mais bonitas do mundo. Casas coloridas suspensas sobre o abismo, calçada centenária entre mar e falésia.',
+    boxes: [
+      {
+        type: 'warn',
+        body: (
+          <>
+            <strong>Logística crítica:</strong> Não há coletivos da tarde em Cruzinha.{' '}
+            <strong>Reservar táxi de regresso antes de sair</strong> (~4.000–4.500 CVE para Ribeira Grande).
+            Água: mínimo <strong>2,5–3 L por pessoa</strong> — poucas fontes ao longo do percurso.
+          </>
+        )
+      }
+    ],
     items: [
-      <>Almoço em Fontainhas (vista mundialmente reconhecida)</>,
-      <>Mergulho em Cruzinha da Garça</>,
+      <><strong>Partida:</strong> coletivo de Ribeira Grande para Ponta do Sol (~50 CVE)</>,
+      <><strong>Trilho:</strong> ~15 km, 5–6h com paragens. Calçada histórica em calcário ao longo das falésias</>,
+      <><strong>Almoço em Formiguinhas:</strong> Restaurante Sónia ou Restaurante Izabel — pargo fresco e cachupa com vista para o mar</>,
+      <><strong>Fontainhas:</strong> aldeia suspensa, paragem obrigatória — fotografia e momento</>,
+      <><strong>Chegada a Cruzinha:</strong> mergulho no mar e cerveja fria no Restaurante Sonafish</>,
     ]
   },
   {
@@ -87,13 +109,20 @@ const days: DayEntry[] = [
     title: 'Dia 4: O Vale Vertical',
     location: 'Ribeira da Torre',
     sleep: 'Lar do Viajante (Paul)',
+    highlight: 'Cascata da Vinha — 150 metros de queda livre, corre o ano todo (única em Santo Antão). O trilho até lá percorre os Caminhos de Pedra históricos do século XIX.',
     boxes: [
       {
         type: 'warn',
         body: <><strong>Ação:</strong> avisar os donos das Las Rochas da hora exata do ferry de amanhã</>
       }
     ],
-    items: ['Ribeira da Torre (Xoxo). Banhos, cascatas e ritmo mais solto.']
+    items: [
+      <><strong>Rocha de Xoxo:</strong> formação rochosa icónica que domina o vale — símbolo de Santo Antão e ponto de partida para os trilhos</>,
+      <><strong>Caminhos de Pedra:</strong> vias históricas do século XIX que ligavam aldeias isoladas. Descida de ~1.480 m até ao mar (3–5h, moderado/difícil)</>,
+      <><strong>Cascata da Vinha:</strong> trilho de 1–2h desde Xoxo. Levar roupa para molhar — a lagoa no sopé convida a mergulhar</>,
+      <><strong>Bar Melícia:</strong> sumo de cana de açúcar fresco no vale — a paragem mais refrescante da ilha</>,
+      <><strong>Destilarias de Grogue:</strong> maio é o <em>último mês de produção</em> antes do encerramento sazonal — oportunidade única de ver o processo ativo</>,
+    ]
   },
   {
     day: 11, month: 'MAI',
@@ -114,6 +143,13 @@ const days: DayEntry[] = [
           </div>
         )
       }
+    ],
+    items: [
+      <><strong>Manhã tranquila</strong> em Paúl — o dia mais lento da viagem, aproveitar</>,
+      <><strong>Destilaria de Grogue:</strong> maio é o <em>último mês de produção</em> do ano — visitar e provar diretamente da fonte</>,
+      <><strong>Passagem:</strong> pequena piscina natural na ribeira para um último mergulho fresco</>,
+      <><strong>Almoço em Pombas</strong> antes de descer — cachupa com ovo ou grelhado local</>,
+      <><strong>Sair para Porto Novo por volta das 14:00</strong> (coletivo ~100 CVE ou táxi ~500 CVE)</>,
     ]
   },
   {
@@ -121,13 +157,37 @@ const days: DayEntry[] = [
     title: 'Dia 6: Tartarugas Freestyle',
     location: 'São Vicente',
     sleep: 'Las Rochas (Mindelo)',
-    items: ['Coletivo para São Pedro na Praça Estrela. Nadar com tartarugas e procurar Deco/Nenass.']
+    boxes: [
+      {
+        type: 'ok',
+        tag: 'Atividade',
+        body: (
+          <>
+            São Pedro é o <strong>único sítio em Cabo Verde</strong> onde se nada com tartarugas-verdes em liberdade.
+            Maio está na época ideal (abr–ago). Tour: ~1.500 CVE/pessoa com guia local.{' '}
+            <strong>É proibido tocar nas tartarugas.</strong>
+          </>
+        )
+      }
+    ],
+    items: [
+      <><strong>Coletivo:</strong> Praça Estrela, Mindelo → São Pedro (~100–150 CVE, ~30 min). Sair cedo de manhã</>,
+      <><strong>Procurar Deco/Nenass</strong> na praia para o tour — guias locais que conhecem onde estão as tartarugas</>,
+      <><strong>Praia de São Pedro:</strong> areia e águas calmas para relaxar entre mergulhos</>,
+      <><strong>Regresso:</strong> coletivo no mesmo ponto de São Pedro de volta a Mindelo</>,
+    ]
   },
   {
     day: 13, month: 'MAI',
     title: 'Dia 7: Mindelo Profundo',
     location: 'São Vicente',
-    items: ['Mercado de peixe, CNAD e grogue à noite.']
+    items: [
+      <><strong>Mercado do Peixe (7h–10h):</strong> junto à Torre de Belém, na marginal. Atum, garoupa, cavala — o centro nervoso de Mindelo ao amanhecer</>,
+      <><strong>CNAD:</strong> Centro Nacional de Artesanato e Design, entrada ~500 CVE. Fachada com 8.800 tampas de bidões recicladas. Exposições de design e artesanato cabo-verdiano</>,
+      <><strong>Praça Nova + Mercado Municipal:</strong> ambiente local, artesanato e souvenirs (Mercado abre 8h–18h30)</>,
+      <><strong>Pôr do sol no quiosque da Praça Nova</strong> — grogue com mel e ver a cidade parar</>,
+      <><strong>Rua de Lisboa à noite:</strong> epicentro da vida noturna — bares, música ao vivo, ambiente. Pedir <em>grogue maduro</em> de Santo Antão — mais suave e envelhecido</>,
+    ]
   },
   {
     day: 14, month: 'MAI',
@@ -138,7 +198,16 @@ const days: DayEntry[] = [
         type: 'alert',
         tag: 'Voo Regresso',
         body: <><strong>EJU7582</strong> (VXE → LIS)<br />16:50 ▸ 23:00 (bagagem fecha 16:10)</>
+      },
+      {
+        type: 'warn',
+        body: <><strong>Sair para o aeroporto por volta das 13:30.</strong> Táxi ~800 CVE (20 min). Check-in online easyJet obrigatório — ter boarding pass na app antes de chegar.</>
       }
+    ],
+    items: [
+      <><strong>Última manhã:</strong> Praia da Laginha — o adeus ao Atlântico</>,
+      <><strong>Café final:</strong> Praça Nova ou Praça Estrela, sem pressa</>,
+      <><strong>Últimas compras (Mercado Municipal, abre 8h):</strong> grogue, pano de terra, doces de papaia</>,
     ]
   }
 ];
