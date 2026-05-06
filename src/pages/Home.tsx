@@ -57,14 +57,23 @@ const Home: React.FC = () => {
 
   const doneCount = checked.filter(Boolean).length;
 
+  const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light');
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+  }, [light]);
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <div className="cv-toolbar">
             <span className="cv-app-title">Cabo Verde Escape</span>
-            <button className="cv-settings-btn">
-              <span className="material-symbols-outlined">settings</span>
+            <button className="cv-settings-btn" onClick={() => {
+              const next = !light;
+              setLight(next);
+              localStorage.setItem('theme', next ? 'light' : 'dark');
+            }}>
+              <span className="material-symbols-outlined">{light ? 'dark_mode' : 'light_mode'}</span>
             </button>
           </div>
         </IonToolbar>

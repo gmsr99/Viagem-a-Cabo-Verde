@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
 
 const EASE_DOCS = [
@@ -19,6 +19,11 @@ type ViewerDoc = { label: string; href: string };
 const Docs: React.FC = () => {
   const [toast, setToast] = useState('');
   const [viewer, setViewer] = useState<ViewerDoc | null>(null);
+  const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+  }, [light]);
 
   const openDoc = (label: string, href: string) => {
     setViewer({ label, href });
@@ -30,8 +35,12 @@ const Docs: React.FC = () => {
         <IonToolbar>
           <div className="cv-toolbar">
             <span className="cv-app-title">Cabo Verde Escape</span>
-            <button className="cv-settings-btn">
-              <span className="material-symbols-outlined">settings</span>
+            <button className="cv-settings-btn" onClick={() => {
+              const next = !light;
+              setLight(next);
+              localStorage.setItem('theme', next ? 'light' : 'dark');
+            }}>
+              <span className="material-symbols-outlined">{light ? 'dark_mode' : 'light_mode'}</span>
             </button>
           </div>
         </IonToolbar>

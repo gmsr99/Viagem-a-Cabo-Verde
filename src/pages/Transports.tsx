@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
 
 const CVE_RATE = 110.265;
@@ -41,14 +41,23 @@ const Transports: React.FC = () => {
   const fromCode  = dir === 'cve-to-eur' ? 'CVE' : 'EUR';
   const toCode    = dir === 'cve-to-eur' ? 'EUR' : 'CVE';
 
+  const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light');
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+  }, [light]);
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <div className="cv-toolbar">
             <span className="cv-app-title">Cabo Verde Escape</span>
-            <button className="cv-settings-btn">
-              <span className="material-symbols-outlined">settings</span>
+            <button className="cv-settings-btn" onClick={() => {
+              const next = !light;
+              setLight(next);
+              localStorage.setItem('theme', next ? 'light' : 'dark');
+            }}>
+              <span className="material-symbols-outlined">{light ? 'dark_mode' : 'light_mode'}</span>
             </button>
           </div>
         </IonToolbar>
