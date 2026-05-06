@@ -14,13 +14,14 @@ const EASE_DOCS = [
   },
 ];
 
+type ViewerDoc = { label: string; href: string };
+
 const Docs: React.FC = () => {
   const [toast, setToast] = useState('');
+  const [viewer, setViewer] = useState<ViewerDoc | null>(null);
 
   const openDoc = (label: string, href: string) => {
-    setToast(`A abrir: ${label}`);
-    setTimeout(() => setToast(''), 2000);
-    window.open(href, '_blank');
+    setViewer({ label, href });
   };
 
   return (
@@ -195,6 +196,63 @@ const Docs: React.FC = () => {
           </div>
         )}
       </IonContent>
+
+      {/* PDF Viewer Overlay */}
+      {viewer && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 200,
+          background: '#1a1a1a',
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+          {/* Viewer Header */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            padding: '12px 16px',
+            paddingTop: 'max(12px, env(safe-area-inset-top))',
+            background: '#222',
+            borderBottom: '1px solid #333',
+            flexShrink: 0,
+          }}>
+            <button
+              onClick={() => setViewer(null)}
+              style={{
+                background: 'rgba(255,255,255,0.08)',
+                border: 'none',
+                borderRadius: 10,
+                width: 38,
+                height: 38,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ color: '#e5e2e1', fontSize: 22 }}>arrow_back</span>
+            </button>
+            <span style={{
+              color: '#e5e2e1',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>{viewer.label}</span>
+          </div>
+
+          {/* PDF iframe */}
+          <iframe
+            src={viewer.href}
+            style={{ flex: 1, border: 'none', width: '100%', background: '#1a1a1a' }}
+            title={viewer.label}
+          />
+        </div>
+      )}
     </IonPage>
   );
 };

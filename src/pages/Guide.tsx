@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/react';
 
 type DayBox = {
@@ -171,14 +172,25 @@ const boxIcons: Record<string, string> = {
   alert: 'flight_land',
 };
 
-const Guide: React.FC = () => (
+const Guide: React.FC = () => {
+  const [light, setLight] = useState(() => localStorage.getItem('theme') === 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+  }, [light]);
+
+  return (
   <IonPage>
     <IonHeader>
       <IonToolbar>
         <div className="cv-toolbar">
           <span className="cv-app-title">Cabo Verde Escape</span>
-          <button className="cv-settings-btn">
-            <span className="material-symbols-outlined">settings</span>
+          <button className="cv-settings-btn" onClick={() => {
+            const next = !light;
+            setLight(next);
+            localStorage.setItem('theme', next ? 'light' : 'dark');
+          }}>
+            <span className="material-symbols-outlined">{light ? 'dark_mode' : 'light_mode'}</span>
           </button>
         </div>
       </IonToolbar>
@@ -248,7 +260,7 @@ const Guide: React.FC = () => (
                         <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: boxIconColors[box.type] }}>{box.tag}</span>
                       </div>
                     )}
-                    <div style={{ fontSize: '0.875rem', color: '#e5e2e1', lineHeight: 1.5 }}>{box.body}</div>
+                    <div style={{ fontSize: '0.875rem', color: 'var(--on-surface)', lineHeight: 1.5 }}>{box.body}</div>
                   </div>
                 ))}
 
@@ -285,6 +297,7 @@ const Guide: React.FC = () => (
       </div>
     </IonContent>
   </IonPage>
-);
+  );
+};
 
 export default Guide;
